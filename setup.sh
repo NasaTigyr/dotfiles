@@ -4,18 +4,18 @@
 sudo apt update
 
 sudo apt install nala
-sudo nala update 
 
-sudo nala install -y openssh-client yt-dlp curl ranger git vim node npm openjdk-17 snap flatpak htop btop neofetch figlet mpv tmux xsel qBittorrent
+sudo apt install curl openssh-client yt-dlp curl ranger git vim nodejs npm default-jdk snap flatpak htop btop neofetch figlet mpv tmux xsel qbittorrent
 
 #VimPlug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 #compile neovim from source: 
+sudo apt install lua5.3 liblua5.3-dev
 
 sudo apt update
-sudo apt install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
+sudo apt install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
 
 git clone https://github.com/neovim/neovim.git
 cd neovim
@@ -25,10 +25,6 @@ make CMAKE_BUILD_TYPE=Release
 sudo make install
 
 nvim --version
-
-#install LaTeX enviorment for neovim(the other stuff is inside the init.vim file 
-sudo apt update
-sudo apt install -y texlive-full latexmk zathura zathura-pdf-poppler
 
 # Bashrc
 #cp ./bashrc ~/.bashrc
@@ -82,6 +78,10 @@ setup_link() {
 # Setup nvim and tmux
 setup_link "nvim"
 setup_link "tmux"
+
+#installing LaTeX
+sudo apt update 
+sudo apt install -y texlive-full latexmk zathura zathura-pdf-poppler
 
 echo "The config files should be mostly done. You have to go and run :PlugInstall and :CocInstall coc-java :CocInstall coc-tsserver"
 echo "Config files restored!"
