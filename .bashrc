@@ -133,9 +133,9 @@ fi
 #alias tmuxvim='tmux new-session -d "vim" \; attach'
 alias bashdoc='cd /usr/share/doc/bash && ls'
 #alias pbcopy='xsel --clipboard --input'
-alias jrun='/home/user1/jrun-bash-script/runjava.sh'
+alias jrun='~/dotfiles/jrun-bash-script/runjava.sh'
 
-alias crun='/home/user1/jrun-bash-script/runc.sh'
+alias crun='~/dotfiles/jrun-bash-script/runc.sh'
 
 alias rc='ranger_cd'
 

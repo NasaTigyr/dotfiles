@@ -7,6 +7,8 @@ sudo apt install nala
 
 sudo apt install curl openssh-client yt-dlp curl ranger git vim nodejs npm default-jdk snap flatpak htop btop neofetch figlet mpv tmux xsel qbittorrent
 
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 #VimPlug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
