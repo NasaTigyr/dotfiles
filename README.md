@@ -1,10 +1,10 @@
 # dotfiles
 Repository to be able to set up formated and reinstalled new linux systems. (bash script for automatic setting of the dependancies)
 
-I had some problems like for example wrong names of files that need to be installed. This script is for now done, but keep in mind this could not work on your machine. 
+Set Git to be able to upload to github using the ssh-client(it's installed with the script).
+After installing git: 
+use 
+    git config command to set the --global user.name/email "name/email" 
 
-I advice to first take a look at the setup.sh file, because there is the main code if you plan on using it( it's using apt, so if that's not your choice, you can just correct it). 
-
-If you are looking for my init.vim file, take a look in the nvim foleder.
-
-have a great day 
+You have to create an ssh key and connect it to your github. 
+ssh-keygen (use the man page if you have the guts..., or just go use chatgpt or some other shit)> 
