@@ -8,3 +8,12 @@ use
 
 You have to create an ssh key and connect it to your github. 
 ssh-keygen (use the man page if you have the guts..., or just go use chatgpt or some other shit)> 
+
+Learn how to use vim!!!
+To learn: 
+-Fuzzy Finder: 
+    -> :Files
+    -> :Buffers
+    -> :Lines
+    -> :Rg
+    -> :BLines

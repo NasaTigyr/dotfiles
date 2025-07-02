@@ -33,9 +33,11 @@ nvim --version
 mv ~/.bashrc ~/.bashrc.backup
 ln -s ~/dotfiles/.bashrc ~/.bashrc
 
-touch ~/.vimrc
+#vimrc file and link
 ln -s ~/dotfiles/.vimrc ~/.vimrc
-
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+sudo apt install ripgrep
 # Neovim
 #mkdir -p ~/.config
 #cp -r ./nvim ~/.config/
