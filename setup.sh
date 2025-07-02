@@ -33,6 +33,9 @@ nvim --version
 mv ~/.bashrc ~/.bashrc.backup
 ln -s ~/dotfiles/.bashrc ~/.bashrc
 
+touch ~/.vimrc
+ln -s ~/dotfiles/.vimrc ~/.vimrc
+
 # Neovim
 #mkdir -p ~/.config
 #cp -r ./nvim ~/.config/

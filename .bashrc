@@ -141,8 +141,6 @@ alias rc='ranger_cd'
 
 alias scim='sc-im'
 
-alias vim='nvim'
-
 alias beepoff="bind 'set bell-style none'"
 alias beepon="bind 'set bell-style audible'"
 
