@@ -17,8 +17,7 @@ Vim custom keymaps:
 
 Lean how to use ffmpeg, This command will start recording:
 ffmpeg \
--f x11grab -video_size 1920x1080 -framerate 30 -i :0.0 \   #keep in mind that the resolution should be on point...
--f alsa -i default \
+-f x11grab -video_size 1920x1080 -framerate 30 -i :0.0 \   f alsa -i default \
 -f v4l2 -i /dev/video0 \
 -filter_complex "[2:v]scale=320:240[cam];[0:v][cam]overlay=W-w-10:H-h-10[out]" \
 -map "[out]" -map 1:a \
@@ -26,7 +25,8 @@ ffmpeg \
 output.mp4
 
 To stop it, just press q to exit it...
-
+these are probably some dependancies that i have to install, so that i can use it. 
+sudo apt install ffmpeg xdg-desktop-portal xdg-desktop-portal-gnome pipewire
 
 Learn how to use vim!!!
 To learn: 

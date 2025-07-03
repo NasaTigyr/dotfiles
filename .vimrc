@@ -21,6 +21,8 @@ colorscheme slate
 " == Key mappings ==
 "nnoremap <Space> <Nop>
 "let mapleader = " " 
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+
 nnoremap y "ay
 vnoremap y "ay
 nnoremap py "ap
@@ -30,6 +32,11 @@ nnoremap yp "+y
 vnoremap yp "+y
 nnoremap pp "+p
 vnoremap pp "+p
+
+nnoremap <silent> <LEFT> :vertical resize -2 <CR>
+nnoremap <silent> <RIGHT> :vertical resize +2 <CR>
+nnoremap <silent> <UP> :resize -2 <CR>
+nnoremap <silent> <DOWN> :resize +2 <CR>
 
 " == Plugins ==
 "
