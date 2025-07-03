@@ -9,6 +9,12 @@ use
 You have to create an ssh key and connect it to your github. 
 ssh-keygen (use the man page if you have the guts..., or just go use chatgpt or some other shit)> 
 
+Vim custom keymaps: 
+    y  - copies into the "ay
+    py - pastes from the "ay
+    yp - copies into the "+y (from the pc clipboard)
+    pp - pastes into the "+y (from the pc clipboard)
+
 Learn how to use vim!!!
 To learn: 
 -Fuzzy Finder: 
