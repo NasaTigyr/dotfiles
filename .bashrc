@@ -8,8 +8,8 @@ set -o vi
 export PATH=$PATH:/usr/local/go/bin
 
 #this makes ranger open with neovim!!!
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=vim
+export VISUAL=vim
 export TERM='xterm-direct'
 export TERM=rxvt-256color
 # If not running interactively, don't do anything
