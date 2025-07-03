@@ -16,9 +16,11 @@ Vim custom keymaps:
     pp - pastes into the "+y (from the pc clipboard)
 
 Lean how to use ffmpeg, This command will start recording:
+
 ffmpeg \
--f x11grab -video_size 1920x1080 -framerate 30 -i :0.0 \   f alsa -i default \
--f v4l2 -i /dev/video0 \
+-f x11grab -video_size 1920x1080 -framerate 30 -i :0.0 \
+-f alsa -i default \
+-f v4l2 -framerate 60 -i /dev/video0 \
 -filter_complex "[2:v]scale=320:240[cam];[0:v][cam]overlay=W-w-10:H-h-10[out]" \
 -map "[out]" -map 1:a \
 -c:v libx264 -preset ultrafast -c:a aac \
