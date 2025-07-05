@@ -46,4 +46,6 @@ Plug 'tpope/vim-sensible'       " Sensible defaults
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }  " Fuzzy finder
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}      " LSP client
+Plug 'sheerun/vim-polyglot'
+
 call plug#end()
