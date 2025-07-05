@@ -1,0 +1,36 @@
+function something () { 
+    there,
+    is,
+    something,
+    here,
+}
+
+:norm
+ using the vi( and then the :norm to have some multi line editing.THis is insane. i love it. 
+
+i can get the output of a terminal command into the vim file using the :.! command. 
+:.! pwd will give you this: 
+/home/hpuser1/Desktop
+
+/bin/bash: line 1: pd: command not found
+
+just did this by using the command: :.! python3 main.py 
+
+hello world
+there is something insane
+
+list list(
+    somethin,
+    is,
+    wrong,
+    brother
+)
+
+TABS!!!
+i have this command that let's me open more than one file in vim at the same time as tab: 
+vim -p text.txt text2.txt
+
+you cicrle around using the gt or gT command.
+
+if you have a link you can go to it by using the gf command. 
+/home/hpuser1/dotfiles/main.py

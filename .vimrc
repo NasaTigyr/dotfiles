@@ -9,6 +9,8 @@ set autoindent smartindent
 syntax on			                   "enable syntax highlighting
 filetype plugin indent on 	           "Enamble filetype detection
 
+"set cursorcolumn 
+set cursorline
 " == Search ==
 set ignorecase                         "case insensitive search
 set smartcase                          "unless u use capitas
@@ -20,8 +22,12 @@ colorscheme slate
 
 " == Key mappings ==
 "nnoremap <Space> <Nop>
-"let mapleader = " " 
+let mapleader = "\\" 
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>g :Rg<Space>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>l :Lines<CR>
 
 nnoremap y "ay
 vnoremap y "ay

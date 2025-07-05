@@ -7,6 +7,7 @@ set relativenumber
 set nohlsearch
 
 set cursorline
+
 set termguicolors
 
 set nobackup 
@@ -107,11 +108,11 @@ Plug 'morhetz/gruvbox'
 Plug 'navarasu/onedark.nvim'
 
 "colorschemes to play around with
-Plug 'folke/tokyonight.nvim'
-Plug 'sainnhe/everforest'
-Plug 'diegoulloao/neofusion.nvim'
-Plug 'shaunsingh/solarized.nvim'
-Plug 'rebelot/kanagawa.nvim'
+"Plug 'folke/tokyonight.nvim'
+"Plug 'sainnhe/everforest'
+"Plug 'diegoulloao/neofusion.nvim'
+"Plug 'shaunsingh/solarized.nvim'
+"Plug 'rebelot/kanagawa.nvim'
 
 call plug#end()
 lua require'colorizer'.setup()

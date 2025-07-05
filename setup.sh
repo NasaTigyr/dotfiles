@@ -7,6 +7,8 @@ sudo apt install nala
 
 sudo apt install curl ffmpeg openssh-client yt-dlp curl ranger git vim nodejs npm default-jdk snap flatpak htop btop neofetch figlet mpv tmux xsel qbittorrent
 
+sudo apt install nasm build-essential
+
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #VimPlug
@@ -87,8 +89,8 @@ setup_link "nvim"
 setup_link "tmux"
 
 #installing LaTeX
-#sudo apt update 
-#sudo apt install -y texlive-full latexmk zathura zathura-pdf-poppler
+sudo apt update 
+sudo apt install -y texlive-full latexmk zathura zathura-pdf-poppler
 nvim +'PlugInstall --sync' +qall
 
 echo "The config files should be mostly done. You have to go and run :PlugInstall and :CocInstall coc-java :CocInstall coc-tsserver"
