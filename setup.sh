@@ -40,13 +40,6 @@ ln -s ~/dotfiles/.vimrc ~/.vimrc
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 sudo apt install ripgrep
-# Neovim
-#mkdir -p ~/.config
-#cp -r ./nvim ~/.config/
-
-
-# Tmux
-#cp -r ./tmux ~/.config/
 
 DOTFILES_DIR="$HOME/dotfiles"
 CONFIG_DIR="$HOME/.config"

@@ -7,9 +7,12 @@ set -o vi
 
 export PATH=$PATH:/usr/local/go/bin
 
+#this is for the fzf finder in vim and nvim
+export FZF_DEFAULT_OPTS="--bind=ctrl-j:down,ctrl-k:up"
+
 #this makes ranger open with neovim!!!
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 export TERM='xterm-direct'
 export TERM=rxvt-256color
 # If not running interactively, don't do anything
@@ -137,14 +140,13 @@ alias jrun='~/dotfiles/jrun-bash-script/runjava.sh'
 
 alias crun='~/dotfiles/jrun-bash-script/runc.sh'
 
+alias vim='nvim'
 alias rc='ranger_cd'
 
 alias beepoff="bind 'set bell-style none'"
 alias beepon="bind 'set bell-style audible'"
 
 alias neofetch="figlet TGR-dev && neofetch"
-
-alias discordo="~/discordo/discordo"
 
 alias tmuxks="tmux kill-server"
 

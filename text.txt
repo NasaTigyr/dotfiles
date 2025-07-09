@@ -1,8 +1,8 @@
 function something () { 
-    there,
-    is,
-    something,
-    here,
+    there, 
+    is, 
+    somethnig,
+    new
 }
 
 :norm

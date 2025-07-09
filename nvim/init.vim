@@ -1,19 +1,27 @@
-set number
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set path+=.,src/**
-set relativenumber
-set nohlsearch
+" == General settings ==
+set nocompatible		               "to be not compatible with vi
+set number			                   "set numbers
+set relativenumber		               "set relative number
+set mouse=a			                   "use mouse support
+set clipboard=unnamedplus              "use the clipboard
+set tabstop=4 shiftwidth=4 expandtab   "spcaes instead of tabs
+set autoindent smartindent
+syntax on			                   "enable syntax highlighting
+filetype plugin indent on 	           "Enamble filetype detection
 
+"set cursorcolumn 
 set cursorline
-
-set termguicolors
-
-set nobackup 
-
+" == Search ==
+set ignorecase                         "case insensitive search
+set smartcase                          "unless u use capitas
+set incsearch                          "Incremental search
+set hlsearch			               "Highlight search matches
 highlight Comment cterm=NONE ctermfg=grey guifg=#808080
 
+" == Colorscheme ==
+  colorscheme slate
+
+" == Key bindings ==
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 " Use leader + l to compile
@@ -22,65 +30,48 @@ nnoremap <leader>ll :VimtexCompile<CR>
 " Use leader + v to view PDF
 nnoremap <leader>lv :VimtexView<CR>
 
+let $FZF_DEFAULT_OPTS = '--bind=ctrl-j:down,ctrl-k:up'
+
 nnoremap <silent> <LEFT> :vertical resize -2 <CR>
 nnoremap <silent> <RIGHT> :vertical resize +2 <CR>
 nnoremap <silent> <UP> :resize -2 <CR>
 nnoremap <silent> <DOWN> :resize +2 <CR>
 nnoremap <silent> K :call ShowDocumentation()<CR>
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 
-inoremap <LEFT> <Nop>
-inoremap <RIGHT> <Nop>
+"nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+"" Do default action for previous item
+"nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+"
+"" Find files using Telescope command-line sugar.
+"nnoremap <leader>ff <cmd>Telescope find_files<cr>
+"nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+"nnoremap <leader>fb <cmd>Telescope buffers<cr>
+"nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+"
+"" Using Lua functions
+"nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+"nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+"nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+"nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" FZF replacements for Telescope
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :Rg<Space>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fh :Helptags<CR>
 
-" Using Lua functions
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
-
-nnoremap y "ay
 nnoremap y "ay
 vnoremap y "ay
 nnoremap py "ap
 vnoremap py "ap
-
-nnoremap d "dd
-vnoremap d "dd
-nnoremap pd "dp
-vnoremap pd "dp
-nnoremap c "cc
-vnoremap c "cc
-nnoremap pc "cp
-vnoremap pc "cp
-nnoremap x "xx
-vnoremap x "xx
-nnoremap px "xp
-vnoremap px "xp
 
 nnoremap yp "+y
 vnoremap yp "+y
 nnoremap pp "+p
 vnoremap pp "+p
 
-
+" == Plugins ==
 call plug#begin('~/.local/share/nvim/plugged')
-"kolev plugs to try
-Plug 'lervag/vimtex'
-
-Plug 'sangdol/mintabline.vim'
-
-Plug 'maxmellon/vim-jsx-pretty'
-
-Plug 'sangdol/mintabline.vim'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
@@ -88,37 +79,16 @@ Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 "autocomplete shit 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovim/nvim-lspconfig'
-Plug 'pangloss/vim-javascript'
 
-"Practice vim motions
-Plug 'ThePrimeagen/vim-be-good'
-
-" Syntax coloring 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-" Add colorizer to highlight CSS/HTML colors
-Plug 'norcalli/nvim-colorizer.lua'
-
-" this is to make that we can use ctrl + hjkl to move between tmux panes
-Plug 'christoomey/vim-tmux-navigator'
-
-"this is somethnig that can handle better comments inside tmux
-Plug 'morhetz/gruvbox'
-" Using Vim-Plug
-Plug 'navarasu/onedark.nvim'
-
-"colorschemes to play around with
-"Plug 'folke/tokyonight.nvim'
-"Plug 'sainnhe/everforest'
-"Plug 'diegoulloao/neofusion.nvim'
-"Plug 'shaunsingh/solarized.nvim'
-"Plug 'rebelot/kanagawa.nvim'
+"vim plugs
+Plug 'tpope/vim-sensible'       " Sensible defaults
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }  " Fuzzy finder
+Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}      " LSP client
+Plug 'lervag/vimtex'
 
 call plug#end()
-lua require'colorizer'.setup()
 
-  colorscheme gruvbox
-"  colorscheme neofusion
 
 command! CreateHtmlFile call CreateHtmlTemplate()
 function! CreateHtmlTemplate()
@@ -136,4 +106,4 @@ function! CreateHtmlTemplate()
     execute 'normal! gg'
 endfunction
 
-lua require'colorizer'.setup()
+let g:vimtex_view_method = 'zathura'

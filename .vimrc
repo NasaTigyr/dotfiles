@@ -24,10 +24,22 @@ colorscheme slate
 "nnoremap <Space> <Nop>
 let mapleader = "\\" 
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>g :Rg<Space>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>l :Lines<CR>
+" Use leader + l to compile
+nnoremap <leader>ll :VimtexCompile<CR>
+
+" Use leader + v to view PDF
+nnoremap <leader>lv :VimtexView<CR>
+
+nnoremap <silent> <LEFT> :vertical resize -2 <CR>
+nnoremap <silent> <RIGHT> :vertical resize +2 <CR>
+nnoremap <silent> <UP> :resize -2 <CR>
+nnoremap <silent> <DOWN> :resize +2 <CR>
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :Rg<Space>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fh :Helptags<CR>
 
 nnoremap y "ay
 vnoremap y "ay
@@ -39,10 +51,6 @@ vnoremap yp "+y
 nnoremap pp "+p
 vnoremap pp "+p
 
-nnoremap <silent> <LEFT> :vertical resize -2 <CR>
-nnoremap <silent> <RIGHT> :vertical resize +2 <CR>
-nnoremap <silent> <UP> :resize -2 <CR>
-nnoremap <silent> <DOWN> :resize +2 <CR>
 
 " == Plugins ==
 "
@@ -52,6 +60,8 @@ Plug 'tpope/vim-sensible'       " Sensible defaults
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }  " Fuzzy finder
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}      " LSP client
-Plug 'sheerun/vim-polyglot'
+Plug 'lervag/vimtex'
 
 call plug#end()
+
+let g:vimtex_view_method = 'zathura'
