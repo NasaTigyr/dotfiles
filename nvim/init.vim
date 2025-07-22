@@ -19,7 +19,7 @@ set hlsearch			               "Highlight search matches
 highlight Comment cterm=NONE ctermfg=grey guifg=#808080
 
 " == Colorscheme ==
-  colorscheme slate
+colorscheme slate
 
 " == Key bindings ==
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
@@ -86,6 +86,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }  " Fuzzy finder
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}      " LSP client
 Plug 'lervag/vimtex'
+
+Plug 'ThePrimeagen/vim-be-good'
 
 call plug#end()
 
