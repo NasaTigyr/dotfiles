@@ -38,3 +38,8 @@ To learn:
     -> :Lines
     -> :Rg
     -> :BLines
+
+
+    ok, this will be the software used for the iphone operations: 
+    sudo apt install libimobiledevice-utils usbmuxd
+

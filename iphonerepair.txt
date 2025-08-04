@@ -1,0 +1,39 @@
+Repair iphone instcrutions
+
+    sudo apt install libimobiledevice-utils usbmuxd
+
+ideviceinfo | grep -i 'storage\|serial\|product'
+
+sudo apt update
+sudo apt install libimobiledevice-utils idevicerestore git build-essential python3-pip
+
+sudo apt update
+sudo apt install pipx
+sudo pipx ensurepath
+
+sudo apt update
+sudo apt install git build-essential cmake libplist-dev libusbmuxd-dev libzip-dev libcurl4-openssl-dev libssl-dev libtool autoconf automake pkg-config
+
+git clone https://github.com/libimobiledevice/futurerestore.git
+cd futurerestore
+
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+
+#Dumping the original nand info 
+sudo flashrom -p ch341a_spi -r nand_backup.bin
+
+
+BasebandSerialNumber: NxIQDZvwJbwAAAAA
+ChipSerialNo: NxIQDZvwJbwAAAAA
+HumanReadableProductVersionString: 18.5
+MLBSerialNumber: C7H94630XJKL73W6A
+ProductName: iPhone OS
+ProductType: iPhone12,1
+ProductVersion: 18.5
+ProductionSOC: true
+SerialNumber: C7CZPG0SN72J
+WirelessBoardSerialNumber: 9B21C500010E

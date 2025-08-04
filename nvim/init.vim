@@ -71,8 +71,8 @@ nnoremap <leader>fh :Helptags<CR>
 
 nnoremap y "ay
 vnoremap y "ay
-nnoremap py "ap
-vnoremap py "ap
+nnoremap p "ap
+vnoremap p "ap
 
 nnoremap yp "+y
 vnoremap yp "+y
