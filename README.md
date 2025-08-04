@@ -43,3 +43,19 @@ To learn:
     ok, this will be the software used for the iphone operations: 
     sudo apt install libimobiledevice-utils usbmuxd
 
+# install wine for windows aplications: 
+
+sudo dpkg --add-architecture i386 *this enables the 32 bit architecture.
+
+sudo apt install wget gnupg2 software-properties-common *some dependancies
+
+sudo gpg --dearmor < winehq.key > winehq.gpg
+sudo install -o root -g root -m 644 winehq.gpg /etc/apt/trusted.gpg.d/winehq.gpg
+
+echo "deb https://dl.winehq.org/wine-builds/debian/ bookworm main" | sudo tee /etc/apt/sources.list.d/winehq.list
+sudo apt update
+sudo apt install --install-recommends winehq-stable
+
+wine --version
+
+winecfg
