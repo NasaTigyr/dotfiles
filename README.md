@@ -49,12 +49,12 @@ sudo dpkg --add-architecture i386 *this enables the 32 bit architecture.
 
 sudo apt install wget gnupg2 software-properties-common *some dependancies
 
-sudo gpg --dearmor < winehq.key > winehq.gpg
-sudo install -o root -g root -m 644 winehq.gpg /etc/apt/trusted.gpg.d/winehq.gpg
+sudo nala install wget gnupg2 software-properties-common -y
+wget -O- https://dl.winehq.org/wine-builds/winehq.key | sudo gpg --dearmor -o /usr/share/keyrings/winehq-archive.key
+echo "deb [signed-by=/usr/share/keyrings/winehq-archive.key] https://dl.winehq.org/wine-builds/debian/ bookworm main" | sudo tee /etc/apt/sources.list.d/winehq.list
+sudo nala update
 
-echo "deb https://dl.winehq.org/wine-builds/debian/ bookworm main" | sudo tee /etc/apt/sources.list.d/winehq.list
-sudo apt update
-sudo apt install --install-recommends winehq-stable
+sudo nala install --install-recommends winehq-stable -y
 
 wine --version
 

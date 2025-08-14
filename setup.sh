@@ -86,6 +86,9 @@ sudo apt update
 sudo apt install -y texlive-full latexmk zathura zathura-pdf-poppler
 nvim +'PlugInstall --sync' +qall
 
+source ~/.bashrc
+
 echo "The config files should be mostly done. You have to go and run :PlugInstall and :CocInstall coc-java :CocInstall coc-tsserver"
 echo "Config files restored!"
+
 
