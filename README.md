@@ -59,3 +59,6 @@ sudo apt install --install-recommends winehq-stable
 wine --version
 
 winecfg
+
+# installing other stuff ussing flatpak!!! 
+discord, viber, signal, steam, sober(roblox), wine -> half life., stremio. 
