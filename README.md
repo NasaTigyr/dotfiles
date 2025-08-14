@@ -61,4 +61,4 @@ wine --version
 winecfg
 
 # installing other stuff ussing flatpak!!! 
-discord, viber, signal, steam, sober(roblox), wine -> half life., stremio. 
+discord, viber, signal, steam, sober(roblox), wine -> half life., stremio. spotify
