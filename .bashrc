@@ -182,3 +182,6 @@ ranger_cd() {
     # Clean up
     rm -f "$tempfile"
 }
+
+# Created by `pipx` on 2025-08-14 21:59:50
+export PATH="$PATH:/home/hpuser1/.local/bin"
