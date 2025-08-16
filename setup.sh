@@ -5,7 +5,22 @@ sudo apt update
 
 sudo apt install nala
 
-sudo apt install curl ffmpeg openssh-client yt-dlp curl ranger git vim nodejs npm default-jdk snap flatpak htop btop neofetch figlet mpv tmux xsel qbittorrent
+sudo apt install curl nodejs vim ffmpeg openssh-client yt-dlp curl ranger git npm default-jdk snap flatpak htop btop figlet mpv tmux xsel qbittorrent
+
+if ! command -v neofetch &> /dev/null; then
+    echo "neofetch not found, trying fastfetch..."
+    
+    # Try to use fastfetch
+    if command -v fastfetch &> /dev/null; then
+        echo "Using fastfetch"
+        fastfetch
+    else
+        echo "fastfetch not found either. Please install neofetch or fastfetch."
+    fi
+else
+    echo "neofetch found, using it"
+    neofetch
+fi
 
 sudo apt install nasm build-essential
 
