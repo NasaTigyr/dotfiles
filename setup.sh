@@ -21,6 +21,7 @@ sudo apt install lua5.3 liblua5.3-dev
 sudo apt update
 sudo apt install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
 
+cd ~
 git clone https://github.com/neovim/neovim.git
 cd neovim
 
@@ -29,6 +30,7 @@ make CMAKE_BUILD_TYPE=Release
 sudo make install
 
 nvim --version
+cd dotfiles
 
 # Bashrc
 #cp ./bashrc ~/.bashrc

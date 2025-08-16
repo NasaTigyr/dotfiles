@@ -1,0 +1,11 @@
+deb http://debian.unnoba.edu.ar/debian/ sid main
+deb-src http://debian.unnoba.edu.ar/debian/ sid main
+deb http://http.us.debian.org/debian sid main contrib non-free non-free-firmware
+deb-src http://http.us.debian.org/debian sid main contrib non-free non-free-firmware
+
+
+sudo apt update 
+sudo apt dist-upgrade  
+sudo apt autoremove
+sudo reboot
+
