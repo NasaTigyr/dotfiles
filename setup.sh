@@ -5,21 +5,13 @@ sudo apt update
 
 sudo apt install nala
 
-sudo apt install curl nodejs vim ffmpeg openssh-client yt-dlp curl ranger git npm default-jdk snap flatpak htop btop figlet mpv tmux xsel qbittorrent
+sudo apt install curl nodejs vim ffmpeg openssh-client yt-dlp ranger git npm default-jdk snap flatpak htop btop figlet mpv tmux xsel qbittorrent
 
-if ! command -v neofetch &> /dev/null; then
-    echo "neofetch not found, trying fastfetch..."
-    
-    # Try to use fastfetch
-    if command -v fastfetch &> /dev/null; then
-        echo "Using fastfetch"
-        fastfetch
-    else
-        echo "fastfetch not found either. Please install neofetch or fastfetch."
-    fi
-else
-    echo "neofetch found, using it"
-    neofetch
+if sudo apt install -y neofetch; then 
+    echo "neofetch installed successfully" 
+else 
+    echo "Failed to install neofetch, trying fastfetch" 
+    sudo apt install -y fastfetch 
 fi
 
 sudo apt install nasm build-essential
@@ -99,11 +91,12 @@ setup_link "nvim"
 setup_link "tmux"
 
 #installing LaTeX
-sudo apt update 
-sudo apt install -y texlive-full latexmk zathura zathura-pdf-poppler
 nvim +'PlugInstall --sync' +qall
 
 source ~/.bashrc
+
+sudo apt update 
+sudo apt install -y texlive-full latexmk zathura zathura-pdf-poppler
 
 echo "The config files should be mostly done. You have to go and run :PlugInstall and :CocInstall coc-java :CocInstall coc-tsserver"
 echo "Config files restored!"
