@@ -1,4 +1,3 @@
-#~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -137,6 +136,8 @@ fi
 alias bashdoc='cd /usr/share/doc/bash && ls'
 #alias pbcopy='xsel --clipboard --input'
 alias jrun='~/dotfiles/jrun-bash-script/runjava.sh'
+
+alias dwmrc='cd ~/.config/dwm-btw ; nvim config.h && cd -'
 
 alias crun='~/dotfiles/jrun-bash-script/runc.sh'
 
