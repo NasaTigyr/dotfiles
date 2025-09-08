@@ -137,7 +137,9 @@ alias bashdoc='cd /usr/share/doc/bash && ls'
 #alias pbcopy='xsel --clipboard --input'
 alias jrun='~/dotfiles/jrun-bash-script/runjava.sh'
 
-alias dwmrc='cd ~/.config/dwm-btw ; nvim config.h && cd -'
+alias dwmrc='cd ~/.config/dwm-btw ; nvim config.h '
+
+alias bashrc='nvim ~/.bashrc && source ~/.bashrc'
 
 alias crun='~/dotfiles/jrun-bash-script/runc.sh'
 
