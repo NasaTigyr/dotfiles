@@ -62,3 +62,6 @@ winecfg
 
 # installing other stuff ussing flatpak!!! 
 discord, viber, signal, steam, sober(roblox), wine -> half life., stremio. spotify
+
+# For volume on the dell studio 1735 : 
+We use amixer

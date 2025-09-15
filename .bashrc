@@ -10,8 +10,8 @@ export PATH=$PATH:/usr/local/go/bin
 export FZF_DEFAULT_OPTS="--bind=ctrl-j:down,ctrl-k:up"
 
 #this makes ranger open with neovim!!!
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=vim
+export VISUAL=vim
 export TERM='xterm-direct'
 export TERM=rxvt-256color
 # If not running interactively, don't do anything
@@ -137,19 +137,16 @@ alias bashdoc='cd /usr/share/doc/bash && ls'
 #alias pbcopy='xsel --clipboard --input'
 alias jrun='~/dotfiles/jrun-bash-script/runjava.sh'
 
-alias dwmrc='cd ~/.config/dwm-btw ; nvim config.h '
+alias dwmrc='cd ~/.config/dwm-btw ; vim config.h '
 
-alias bashrc='nvim ~/.bashrc && source ~/.bashrc'
+alias bashrc='vim ~/.bashrc && source ~/.bashrc'
 
 alias crun='~/dotfiles/jrun-bash-script/runc.sh'
 
-alias vim='nvim'
 alias rc='ranger_cd'
 
 alias beepoff="bind 'set bell-style none'"
 alias beepon="bind 'set bell-style audible'"
-
-alias neofetch="figlet TGR-dev && neofetch"
 
 alias tmuxks="tmux kill-server"
 
