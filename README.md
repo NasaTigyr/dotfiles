@@ -15,6 +15,11 @@ Vim custom keymaps:
     yp - copies into the "+y (from the pc clipboard)
     pp - pastes into the "+y (from the pc clipboard)
 
+It uses: xsel for the pasting, so it's important to have it installed before hand or run the script. 
+
+Tmux custom keymaps: 
+    y - copy text from te visual mode(also enter works)
+
 Lean how to use ffmpeg, This command will start recording:
 
 ffmpeg \
