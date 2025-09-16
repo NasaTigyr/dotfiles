@@ -47,22 +47,6 @@ nnoremap <silent> <UP> :resize -2 <CR>
 nnoremap <silent> <DOWN> :resize +2 <CR>
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
-"nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-"" Do default action for previous item
-"nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-"
-"" Find files using Telescope command-line sugar.
-"nnoremap <leader>ff <cmd>Telescope find_files<cr>
-"nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-"nnoremap <leader>fb <cmd>Telescope buffers<cr>
-"nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-"
-"" Using Lua functions
-"nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-"nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-"nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-"nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
 " FZF replacements for Telescope
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fg :Rg<Space>
@@ -115,6 +99,22 @@ function! CreateHtmlTemplate()
     execute 'normal! o</body>'
     execute 'normal! o</html>'
     execute 'normal! gg'
+endfunction
+
+command! CreateLatexDoc  call CreateLatexDoc()
+function! CreateLatexDoc()
+execute 'normal! o\documentclass{article}'
+execute 'normal! o'
+execute 'normal! o\title{My first document}'
+execute 'normal! o\date{2013-09-01}'
+execute 'normal! o\author{John Doe}'
+execute 'normal! o'
+execute 'normal! o\begin{document}'
+execute 'normal! o\maketitle'
+execute 'normal! o\newpage'
+execute 'normal! o'
+execute 'normal! oHello World!'
+execute 'normal! o\end{document}'
 endfunction
 
 let g:vimtex_view_method = 'zathura'

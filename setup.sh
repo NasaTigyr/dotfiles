@@ -54,7 +54,6 @@ nvim +'PlugInstall --sync' +qall
 
 source ~/.bashrc
 
-echo "The config files should be mostly done. You have to go and run :PlugInstall and :CocInstall coc-java :CocInstall coc-tsserver"
-echo "Config files restored!"
+echo "Source and config files have been set."
 
 

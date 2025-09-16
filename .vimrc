@@ -61,7 +61,6 @@ vnoremap yp "+y
 nnoremap pp "+p
 vnoremap pp "+p
 
-
 " == Plugins ==
 "
 call plug#begin('~/.vim/plugged')
@@ -73,5 +72,22 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}      " LSP client
 Plug 'lervag/vimtex'
 
 call plug#end()
+
+command! CreateLatexDoc  call CreateLatexDoc()
+function! CreateLatexDoc()
+execute 'normal! o\documentclass{article}'
+execute 'normal! o'
+execute 'normal! o\title{My first document}'
+execute 'normal! o\date{2013-09-01}'
+execute 'normal! o\author{John Doe}'
+execute 'normal! o'
+execute 'normal! o\begin{document}'
+execute 'normal! o\maketitle'
+execute 'normal! o\newpage'
+execute 'normal! o'
+execute 'normal! oHello World!'
+execute 'normal! o\end{document}'
+endfunction
+
 
 let g:vimtex_view_method = 'zathura'
