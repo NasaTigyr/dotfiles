@@ -1,7 +1,6 @@
 # dotfiles
-Repository to be able to set up a formated and reinstalled new linux systems. (bash script for automatic setting of the source files)
+Repository to be able to set up formated and reinstalled new linux systems. (bash script for automatic setting of the dependancies)
 
-# Git
 Set Git to be able to upload to github using the ssh-client(it's installed with the script).
 After installing git: 
 use 
@@ -9,9 +8,6 @@ use
 
 You have to create an ssh key and connect it to your github. 
 ssh-keygen (use the man page if you have the guts..., or just go use chatgpt or some other shit)> 
-
-# VIM and Neovim setup: 
-The setups are minimal and are almost identicall. The idea is to have the same working setup for both. I have an old laptop, that actually really doesn't like Neovim, so this is the result.
 
 Vim custom keymaps: 
     y  - copies into the "ay
@@ -21,16 +17,10 @@ Vim custom keymaps:
 
 It uses: xsel for the pasting, so it's important to have it installed before hand or run the script. 
 
-# Tmux custom setup: 
-    Cntr + b + [ - visual mode in tmux.
-    Use vim motions to sellectj
-    y - copy text from the visual mode.
-    Enter - you can use enter to copy again from the visual mode.
-    
-    From time to time i like using the enter(it's a bigger button xd).
+Tmux custom keymaps: 
+    y - copy text from te visual mode(also enter works)
 
-# Lean how to use ffmpeg, 
-This command will start recording for the x11 session:
+Lean how to use ffmpeg, This command will start recording:
 
 ffmpeg \
 -f x11grab -video_size 1920x1080 -framerate 30 -i :0.0 \
@@ -79,4 +69,4 @@ winecfg
 discord, viber, signal, steam, sober(roblox), wine -> half life., stremio. spotify
 
 # For volume on the dell studio 1735 : 
-We use amixer, alsamixer
+We use amixer

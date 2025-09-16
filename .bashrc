@@ -150,6 +150,8 @@ alias beepon="bind 'set bell-style audible'"
 
 alias tmuxks="tmux kill-server"
 
+alias sound="alsamixer"
+
 bind 'TAB:menu-complete'
 
 pbcopy() {
