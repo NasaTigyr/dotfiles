@@ -1,7 +1,6 @@
 # .bashrc
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return set -o vi
+set -o vi
 
 export EDITOR=vim
 export VISUAL=vim
