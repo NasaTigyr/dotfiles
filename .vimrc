@@ -60,6 +60,17 @@ nnoremap yp "+y
 vnoremap yp "+y
 nnoremap pp "+p
 vnoremap pp "+p
+" Go to definition
+nmap <silent> gd <Plug>(coc-definition)
+
+" Find references
+nmap <silent> gr <Plug>(coc-references)
+
+" Show hover documentation
+nmap <silent> K :call CocActionAsync('doHover')<CR>
+
+" Rename symbol
+nmap <leader>rn <Plug>(coc-rename)
 
 " == Plugins ==
 "

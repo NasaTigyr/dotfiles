@@ -7,7 +7,8 @@
 ln -s ~/.config/dotfiles/.vimrc ~/.vimrc
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-sudo apt install ripgrep
+sudo apt install -y  ripgrep
+sudo apt install -y  vim-gtk3
 
 DOTFILES_DIR="$HOME/.config/dotfiles"
 CONFIG_DIR="$HOME/.config"
