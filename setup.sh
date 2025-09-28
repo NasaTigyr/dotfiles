@@ -1,15 +1,15 @@
 #!/bin/bash
 
-mv ~/.bashrc ~/.bashrc.backup
-ln -s ~/dotfiles/.bashrc ~/.bashrc
+#mv ~/.bashrc ~/.bashrc.backup
+#ln -s ~/.config/dotfiles/.bashrc ~/.bashrc
 
 #vimrc file and link
-ln -s ~/dotfiles/.vimrc ~/.vimrc
+ln -s ~/.config/dotfiles/.vimrc ~/.vimrc
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 sudo apt install ripgrep
 
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR="$HOME/.config/dotfiles"
 CONFIG_DIR="$HOME/.config"
 
 # Create ~/.config if it doesn't exist
