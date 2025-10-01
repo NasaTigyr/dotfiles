@@ -1,55 +1,44 @@
-#sudo apt update
-sudo xbps-install -S 
+# Update system
+sudo xbps-install -Syu
 
-#sudo apt install nala
+# Install core tools
+sudo xbps-install -Sy curl nodejs vim ffmpeg yt-dlp ranger git openjdk flatpak htop btop figlet mpv tmux xsel qbittorrent ripgrep fastfetch
 
-#sudo apt install curl nodejs vim ffmpeg openssh-client yt-dlp ranger git npm default-jdk snap flatpak htop btop figlet mpv tmux xsel qbittorrent
-sudo xbps-install -Sy curl nodejs vim ffmpeg openssh-client yt-dlp ranger git npm default-jdk snap flatpak htop btop figlet mpv tmux xsel qbittorrent
+# Optional: OpenSSH client
+ sudo xbps-install -Sy openssh
 
-#if sudo apt install -y neofetch; then 
-    #echo "neofetch installed successfully" 
-#else 
-    #echo "Failed to install neofetch, trying fastfetch" 
-    #sudo apt install -y fastfetch 
-#fi
+# Flatpak setup
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-#sudo apt install nasm build-essential
-
-sudo flatpak remote-add --if-not-exbps-installsts flathub https://flathub.org/repo/flathub.flatpakrepo
-
-#VimPlug
+# VimPlug for Neovim
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-#compile neovim from source: 
-sudo xbps-install -Sy lua5.3 liblua5.3-dev
+# Build dependencies for compiling Neovim
+sudo xbps-install -Sy ninja gettext libtool autoconf automake cmake g++ pkg-config unzip curl doxygen
 
-#sudo apt update
-sudo xbps-install -S
-sudo xbps-install -Sy ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
-
+# Clone and build Neovim
 cd ~
 git clone https://github.com/neovim/neovim.git
 cd neovim
-
 make CMAKE_BUILD_TYPE=Release
-
 sudo make install
 
+# Verify Neovim installation
 nvim --version
-cd ~/.config/dotfiles
 
-
-#vimrc file and link
+# Install VimPlug for Vim (if you use both Vim and Neovim)
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-sudo xbps-install -Sy install ripgrep
 
-#installing LaTeX
-nvim +'PlugInstall --sync' +qall
+# Install Zathura for PDF preview
+sudo xbps-install -Sy zathura zathura-pdf-poppler
 
-sudo xbps-install -Su 
-sudo xbps-install -Sy texlive-full latexmk zathura zathura-pdf-poppler
+# Install LaTeX
+sudo xbps-install -Sy texlive-base texlive-bin texlive-latexextra texlive-fontsrecommended latexmk
 
-echo "The config files should be mostly done. You have to go and run :PlugInstall and :CocInstall coc-java :CocInstall coc-tsserver"
+# Final instructions
+echo "Run :PlugInstall inside nvim"
+echo "Run :CocInstall coc-java coc-tsserver for language servers"
 echo "Config files restored!"
+
