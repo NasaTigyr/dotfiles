@@ -20,13 +20,6 @@ set hlsearch			               "Highlight search matches
 " == Colorscheme ==
 colorscheme slate
 
-" == Cyrilic support ==
-" Vim Cyrillic setup
-set encoding=utf-8
-set keymap=russian-jcukenwin
-set iminsert=0
-set imsearch=0
-
 " == Key mappings ==
 "nnoremap <Space> <Nop>
 let mapleader = "\\" 
