@@ -58,6 +58,16 @@ To learn:
 
 # installing other stuff ussing flatpak!!! 
 discord, viber, signal, steam, sober(roblox), wine -> half life., stremio. spotify
+NetworkManager
 
 # For volume on the dell studio 1735 : 
 I use amixer, alsamixer
+
+
+# Usage of nmcli ( NetworkManager cli): 
+install NetworkManager, 
+link it from the /etc/sv dir to the /var/service. 
+then use, main commands: 
+
+nmcli dev wifi list
+nmcli dev wifi connect  "Your ssid" password "password"

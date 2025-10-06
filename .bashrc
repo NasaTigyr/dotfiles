@@ -17,13 +17,13 @@ alias dwm='cd ~/.config/dwm-btw'
 #alias tmuxvim='tmux new-session -d "vim" \; attach'
 alias bashdoc='cd /usr/share/doc/bash && ls'
 #alias pbcopy='xsel --clipboard --input'
-alias jrun='~/dotfiles/jrun-bash-script/runjava.sh'
 
 alias dwmrc='cd ~/.config/dwm-btw ; vim config.h '
 
 alias bashrc='vim ~/.bashrc && source ~/.bashrc'
 
-alias crun='~/dotfiles/jrun-bash-script/runc.sh'
+alias crun='~/.config/dotfiles/jrun-bash-script/runc.sh'
+alias jrun='~/.config/dotfiles/jrun-bash-script/runjava.sh'
 
 alias rc='ranger_cd'
 

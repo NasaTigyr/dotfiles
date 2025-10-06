@@ -57,6 +57,7 @@ nnoremap yp "+y
 vnoremap yp "+y
 nnoremap pp "+p
 vnoremap pp "+p
+
 " Go to definition
 nmap <silent> gd <Plug>(coc-definition)
 
