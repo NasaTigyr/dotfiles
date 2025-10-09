@@ -21,20 +21,21 @@ set hlsearch			               "Highlight search matches
 colorscheme slate
 
 " == Key mappings ==
-"nnoremap <Space> <Nop>
-let mapleader = "\\" 
+let mapleader = " " 
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 " Use leader + l to compile
-nnoremap <leader>ll :VimtexCompile<CR>
+"nnoremap <leader>ll :VimtexCompile<CR>
 
 " Use leader + v to view PDF
-nnoremap <leader>lv :VimtexView<CR>
+"nnoremap <leader>lv :VimtexView<CR>
 
 nnoremap <silent> <LEFT> :vertical resize -2 <CR>
 nnoremap <silent> <RIGHT> :vertical resize +2 <CR>
 nnoremap <silent> <UP> :resize -2 <CR>
 nnoremap <silent> <DOWN> :resize +2 <CR>
 nnoremap <silent> K :call ShowDocumentation()<CR>
+
+nnoremap <leader>cd :Ex<CR>
 
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fg :Rg<Space>
@@ -64,7 +65,6 @@ nmap <silent> K :call CocActionAsync('doHover')<CR>
 nmap <leader>rn <Plug>(coc-rename)
 
 " == Plugins ==
-"
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'       " Sensible defaults
@@ -90,6 +90,5 @@ execute 'normal! o'
 execute 'normal! oHello World!'
 execute 'normal! o\end{document}'
 endfunction
-
 
 let g:vimtex_view_method = 'zathura'

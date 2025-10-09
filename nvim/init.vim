@@ -23,7 +23,7 @@ colorscheme slate
 
 " == Key bindings ==
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-let mapleader = "\\" 
+let mapleader = " " 
 " Use leader + l to compile
 nnoremap <leader>ll :VimtexCompile<CR>
 
