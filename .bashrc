@@ -19,6 +19,7 @@ alias bashdoc='cd /usr/share/doc/bash && ls'
 #alias pbcopy='xsel --clipboard --input'
 
 alias dwmrc='cd ~/.config/dwm-btw ; vim config.h '
+alias dotfiles='cd ~/.config/dotfiles'
 
 alias bashrc='vim ~/.bashrc && source ~/.bashrc'
 
