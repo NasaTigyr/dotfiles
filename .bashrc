@@ -2,9 +2,13 @@
 
 set -o vi
 
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 
+alias vpnup='sudo wg-quick up ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
+alias vpndown='sudo wg-quick down ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
+
+alias vim='nvim'
 alias ls='ls --color=auto'
 alias xi='sudo xbps-install'
 alias xu='sudo xbps-update'
@@ -25,6 +29,7 @@ alias bashrc='vim ~/.bashrc && source ~/.bashrc'
 
 alias crun='~/.config/dotfiles/jrun-bash-script/runc.sh'
 alias jrun='~/.config/dotfiles/jrun-bash-script/runjava.sh'
+alias prun='python3'
 
 alias rc='ranger_cd'
 
