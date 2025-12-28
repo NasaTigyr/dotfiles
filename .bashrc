@@ -8,6 +8,10 @@ export VISUAL=nvim
 alias vpnup='sudo wg-quick up ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
 alias vpndown='sudo wg-quick down ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
 
+
+alias homevpnup='sudo wg-quick up ~/client-wg.conf'
+alias homevpndown='sudo wg-quick down ~/client-wg.conf'
+
 alias vim='nvim'
 alias ls='ls --color=auto'
 alias xi='sudo xbps-install'
