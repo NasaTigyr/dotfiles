@@ -7,6 +7,7 @@ export VISUAL=nvim
 
 alias vpnup='sudo wg-quick up ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
 alias vpndown='sudo wg-quick down ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
+alias mount3ds='sudo mount -o uid=$UID,gid=$(id -g) /dev/mmcblk0p1 /home/dell/usb'
 
 
 alias homevpnup='sudo wg-quick up ~/client-wg.conf'
