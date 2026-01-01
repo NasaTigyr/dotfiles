@@ -31,7 +31,8 @@ fi
 echo -e "${YELLOW}=== Installing core packages ===${NC}"
 
 if [ "$DISTRO" = "void" ]; then
-    sudo xbps-install -Sy curl nodejs vim ffmpeg openssh yt-dlp ranger git openjdk flatpak htop btop mpv tmux xsel qbittorrent ripgrep fastfetch 
+    sudo xbps-install -Sy curl nodejs vim ffmpeg openssh yt-dlp ranger git openjdk flatpak htop btop mpv tmux xsel qbittorrent ripgrep fastfetch alsamixer amixer
+
 else
     sudo apt install -y curl nodejs vim ffmpeg openssh-client yt-dlp ranger git npm default-jdk flatpak htop btop mpv tmux xsel qbittorrent \
         nasm build-essential lua5.3 liblua5.3-dev ninja-build gettext libtool libtool-bin autoconf ripgrep automake cmake g++ pkg-config unzip curl doxygen

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#mv ~/.bashrc ~/.bashrc.backup
-#ln -s ~/.config/dotfiles/.bashrc ~/.bashrc
+mv ~/.bashrc ~/.bashrc.backup
+ln -s ~/.config/dotfiles/.bashrc ~/.bashrc
 
 #vimrc file and link
 ln -s ~/.config/dotfiles/.vimrc ~/.vimrc

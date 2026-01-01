@@ -1,0 +1,22 @@
+nala
+sudo apt install curl nodejs vim ffmpeg openssh openssh-client yt-dlp ranger git npm default-jdk flatpak htop btop mpv tmux xsel qbittorrent alsamixer ripgrep 
+
+neofetch / fastfetch depending on system.
+
+nasm build-essential for assembly
+
+sudo flatpak remote-add --if-not-exbps-installsts flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# VimPlug
+`
+for Nvim: 
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+for Vim: 
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+clone nvim from source 
+use PlugInstall in neovim to install enviorment, as well as in vim 
+CocInstall

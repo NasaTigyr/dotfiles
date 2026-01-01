@@ -20,6 +20,6 @@ Bash script that optimizes the running java projects or .java files.
    and you are ready to use the jrun command
 
 
-#crun-bash-script
+# crun-bash-script
 just run that shit 
 

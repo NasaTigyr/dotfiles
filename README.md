@@ -63,7 +63,6 @@ NetworkManager
 # For volume on the dell studio 1735 : 
 I use amixer, alsamixer
 
-
 # Usage of nmcli ( NetworkManager cli): 
 install NetworkManager, 
 link it from the /etc/sv dir to the /var/service. 
