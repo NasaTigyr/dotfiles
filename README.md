@@ -70,3 +70,6 @@ then use, main commands:
 
 nmcli dev wifi list
 nmcli dev wifi connect  "Your ssid" password "password"
+
+# Set the repeat rate higher for the rate. `
+xset r rate 150 50
