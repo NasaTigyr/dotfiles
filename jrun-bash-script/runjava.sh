@@ -47,7 +47,8 @@ MAIN_CLASS=$(basename "$MAIN_FILE" .java)
 # Compile the .java files from src to bin
 #
 echo "Compiling Java files..."
-javac -d "$BIN_DIR" -cp "$LIB_DIR/*" $(find "$SRC_DIR" -name "*.java")
+
+javac -d "$BIN_DIR" -cp "$(echo $LIB_DIR/*.jar | tr ' ' ':')" $(find "$SRC_DIR" -name "*.java")
 
 if [ $? -ne 0 ]; then
     echo "Compilation failed."

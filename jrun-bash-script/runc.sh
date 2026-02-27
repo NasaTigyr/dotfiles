@@ -21,7 +21,7 @@ OUTPUT_FILE="$BASENAME.out"
 # Function to compile C files
 compile_c() {
     echo -e "${GREEN}Compiling C source: $SOURCE_FILE...${NC}"
-    gcc "$SOURCE_FILE" -o "$OUTPUT_FILE"
+    gcc -std=c89 "$SOURCE_FILE" -o "$OUTPUT_FILE"
 }
 
 # Function to compile C++ files
