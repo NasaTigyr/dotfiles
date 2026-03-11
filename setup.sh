@@ -55,6 +55,8 @@ nvim +'PlugInstall --sync' +qall
 
 source ~/.bashrc
 
+xset r rate 150 50
+
 echo "Source and config files have been set."
 
 

@@ -21,7 +21,8 @@ OUTPUT_FILE="$BASENAME.out"
 # Function to compile C files
 compile_c() {
     echo -e "${GREEN}Compiling C source: $SOURCE_FILE...${NC}"
-    gcc -std=c89 "$SOURCE_FILE" -o "$OUTPUT_FILE"
+    #gcc -std=c89 "$SOURCE_FILE" -o "$OUTPUT_FILE"
+    gcc "$SOURCE_FILE" -o "$OUTPUT_FILE"
 }
 
 # Function to compile C++ files
@@ -45,7 +46,7 @@ fi
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}Compilation successful. Output: $OUTPUT_FILE${NC}"
     echo -e "Program running: "
-    ./$OUTPUT_FILE
+    ./$OUTPUT_FILE "${@:2}"
     echo
 else
     echo -e "${RED}Compilation failed.${NC}"
