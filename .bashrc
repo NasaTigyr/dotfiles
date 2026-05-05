@@ -5,6 +5,12 @@ set -o vi
 export EDITOR=nvim
 export VISUAL=nvim
 
+alias ls='ls --color=auto'
+alias xi='sudo xbps-install '
+alias network='sudo nmtui'
+alias dvorak='sudo loadkeys dvorak'
+alias stdv='sudo setxkbmap us -variant dvorak'
+
 alias vpnup='sudo wg-quick up ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
 alias vpndown='sudo wg-quick down ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
 alias mount3ds='sudo mount -o uid=$UID,gid=$(id -g) /dev/mmcblk0p1 /home/dell/usb'
@@ -23,11 +29,8 @@ alias dv='setxkbmap -layout us -variant dvorak'
 alias qw='setxkbmap -layout us -variant qwerty'
 alias dwm='cd ~/.config/dwm-btw'
 
-#alias tmuxvim='tmux new-session -d "vim" \; attach'
-alias bashdoc='cd /usr/share/doc/bash && ls'
-#alias pbcopy='xsel --clipboard --input'
-
-alias dwmrc='cd ~/.config/dwm-btw ; vim config.h '
+alias dwmrc='cd ~/dwm ; vim config.h '
+alias strc='cd ~/st ; vim config.h '
 alias dotfiles='cd ~/.config/dotfiles'
 
 alias bashrc='vim ~/.bashrc && source ~/.bashrc'
