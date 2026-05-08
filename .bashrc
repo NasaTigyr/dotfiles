@@ -16,6 +16,7 @@ alias vpnup='sudo wg-quick up ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
 alias vpndown='sudo wg-quick down ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
 alias mount3ds='sudo mount -o uid=$UID,gid=$(id -g) /dev/mmcblk0p1 /home/dell/usb'
 
+alias espbuild='bash ~/.config/dotfiles/espbuildcommand.sh'
 
 alias homevpnup='sudo wg-quick up ~/client-wg.conf'
 alias homevpndown='sudo wg-quick down ~/client-wg.conf'
@@ -56,28 +57,27 @@ pbcopy() {
     xsel --clipboard --clear
     xsel --primary --clear
     xsel --secondary --clear
-  elif [ -z "$1" ]; then 
-    xsel -i --clipboard 
-  else 
+  elif [ -z "$1" ]; then
+    xsel -i --clipboard
+  else
     echo "wrong command: you meant pbcopy or pbcopy -c"
   fi
 }
 
 PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h:\[\033[1;35m\]\w\[\033[1;31m\]\$\[\033[0m\] '
 
-
 ranger_cd() {
-    # Temporary file to store the directory path
-    local tempfile="$(mktemp)"
-    
-    # Launch ranger with --choosedir option
-    ranger --choosedir="$tempfile" "$@"
-    
-    # If a directory is selected, change to that directory
-    if [ -f "$tempfile" ] && [ -n "$(cat "$tempfile")" ]; then
-        cd "$(cat "$tempfile")"
-    fi
-    
-    # Clean up
-    rm -f "$tempfile"
+  # Temporary file to store the directory path
+  local tempfile="$(mktemp)"
+
+  # Launch ranger with --choosedir option
+  ranger --choosedir="$tempfile" "$@"
+
+  # If a directory is selected, change to that directory
+  if [ -f "$tempfile" ] && [ -n "$(cat "$tempfile")" ]; then
+    cd "$(cat "$tempfile")"
+  fi
+
+  # Clean up
+  rm -f "$tempfile"
 }

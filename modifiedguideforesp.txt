@@ -1,0 +1,202 @@
+ESP32-C3 + MX Linux + Vim + ESP-IDF Full Setup & Workflow Guide
+
+============================================================
+1. Overview
+============================================================
+
+The ESP32-C3 is a microcontroller board programmed from your Linux PC.
+
+On MX Linux, you use:
+- ESP-IDF (Espressif IoT Development Framework)
+- Vim / LazyVim for editing code
+- USB serial (/dev/ttyACM0) for communication
+
+Workflow:
+install → write code → build → flash → monitor
+
+
+============================================================
+2. System Installation (FIRST TIME ONLY)
+============================================================
+
+------------------------------------------------------------
+2.1 Install dependencies
+------------------------------------------------------------
+
+sudo apt update
+sudo apt install git wget flex bison gperf python3 python3-pip python3-venv \
+cmake ninja-build ccache libffi-dev libssl-dev dfu-util
+
+
+------------------------------------------------------------
+2.2 Create ESP folder
+------------------------------------------------------------
+
+mkdir -p ~/esp
+cd ~/esp
+
+
+------------------------------------------------------------
+2.3 Clone ESP-IDF
+------------------------------------------------------------
+
+git clone --recursive https://github.com/espressif/esp-idf.git
+
+
+------------------------------------------------------------
+2.4 Install toolchains (IMPORTANT)
+------------------------------------------------------------
+
+cd ~/esp/esp-idf
+./install.sh esp32c3
+
+
+------------------------------------------------------------
+2.5 USB permissions fix
+------------------------------------------------------------
+
+sudo usermod -a -G dialout $USER
+
+(reboot after this)
+
+
+------------------------------------------------------------
+2.6 Load ESP-IDF environment
+------------------------------------------------------------
+
+source ~/esp/esp-idf/export.sh
+
+
+------------------------------------------------------------
+2.7 Verify installation
+------------------------------------------------------------
+
+idf.py --version
+idf.py set-target esp32c3
+
+
+============================================================
+3. Create a Project
+============================================================
+
+cd ~/esp
+idf.py create-project my_c3_project
+cd my_c3_project
+
+idf.py set-target esp32c3
+
+
+============================================================
+4. Project Structure
+============================================================
+
+my_c3_project/
+├── CMakeLists.txt
+├── main/
+│   ├── CMakeLists.txt
+│   └── main.c
+
+Edit:
+vim main/main.c
+
+
+============================================================
+5. Workflow (DAILY USE)
+============================================================
+
+------------------------------------------------------------
+5.1 Load environment
+------------------------------------------------------------
+
+source ~/esp/esp-idf/export.sh
+
+
+------------------------------------------------------------
+5.2 Build
+------------------------------------------------------------
+
+idf.py build
+
+
+------------------------------------------------------------
+5.3 Flash
+------------------------------------------------------------
+
+idf.py -p /dev/ttyACM0 flash
+
+
+------------------------------------------------------------
+5.4 Monitor
+------------------------------------------------------------
+
+idf.py -p /dev/ttyACM0 monitor
+
+Exit: Ctrl + ]
+
+
+------------------------------------------------------------
+5.5 Combined
+------------------------------------------------------------
+
+idf.py flash monitor
+
+
+============================================================
+6. How it works internally
+============================================================
+
+- Code compiles into firmware
+- Firmware is flashed to ESP32 flash memory
+- ESP32 boots from flash
+- Output goes via UART over USB
+- Linux reads it via /dev/ttyACM0
+
+
+============================================================
+7. Common Issues
+============================================================
+
+Wrong USB port:
+ls /dev/ttyACM*
+
+Permission denied:
+sudo usermod -a -G dialout $USER
+
+Flash size fix:
+idf.py menuconfig → Flash size → 4MB
+
+UART errors:
+menuconfig → Console output → UART
+
+
+============================================================
+8. Key Concepts
+============================================================
+
+idf.py build   → compile
+idf.py flash   → upload
+idf.py monitor → logs
+
+app_main() → entry point
+
+
+============================================================
+9. Recommended Coding Style
+============================================================
+
+- Use fgets instead of scanf
+- Avoid raw UART unless needed
+- fflush(stdout)
+
+
+============================================================
+10. Summary
+============================================================
+
+1. Install dependencies
+2. Install ESP-IDF
+3. Source environment
+4. Build
+5. Flash
+6. Monitor
+7. Code in Vim
