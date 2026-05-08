@@ -32,7 +32,8 @@ because I want to have it backed up just in case. I don't feel like installing L
     
     From time to time i like using the enter(it's a bigger button xd).
 
-    Important, in tmux, run :source ~/dir/to/the/source/file so that it can use those keybinds you just created. 
+    Important, in tmux, run :source-file ~/dir/to/the/source/file so that it can use those keybinds you just created. 
+  you can also use tmux source-file ~/dir/to/the/source/file
 
 # Lean how to use ffmpeg, 
 This command will start recording for the x11 session:
