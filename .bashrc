@@ -8,6 +8,7 @@ export VISUAL=nvim
 alias ls='ls --color=auto'
 alias xi='sudo xbps-install '
 alias network='sudo nmtui'
+
 alias dvorak='sudo loadkeys dvorak'
 alias stdv='sudo setxkbmap us -variant dvorak'
 

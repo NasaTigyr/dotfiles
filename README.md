@@ -1,5 +1,5 @@
 # dotfiles
-Repository to be able to set up a formated and reinstalled new linux systems. (bash script for automatic setting of the source files)
+These are my dotfiles. I will be simplyifing them from now on, so keep that in mind. The idea is to have a simple set up for microcontrollers and other stuff.
 
 # Git
 Set Git to be able to upload to github using the ssh-client(it's installed with the script).
@@ -21,6 +21,9 @@ Vim custom keymaps:
 
 It uses: xsel for the pasting, so it's important to have it installed before hand or run the script. 
 
+Now I have been experimenting with Lazy Vim and I will be using that for now. However I will be leaving this here,
+because I want to have it backed up just in case. I don't feel like installing LazyVim on something like a server.
+
 # Tmux custom setup: 
     Cntr + b + [ - visual mode in tmux.
     Use vim motions to sellectj
@@ -28,6 +31,8 @@ It uses: xsel for the pasting, so it's important to have it installed before han
     Enter - you can use enter to copy again from the visual mode.
     
     From time to time i like using the enter(it's a bigger button xd).
+
+    Important, in tmux, run :source ~/dir/to/the/source/file so that it can use those keybinds you just created. 
 
 # Lean how to use ffmpeg, 
 This command will start recording for the x11 session:
@@ -71,3 +76,6 @@ then use, main commands:
 
 nmcli dev wifi list
 nmcli dev wifi connect  "Your ssid" password "password"
+
+Here you can also use the nmcui, because that way you have a faster way to use the NetworkManager when shit hits the
+fan. 
