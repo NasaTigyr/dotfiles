@@ -16,8 +16,11 @@ alias vpnup='sudo wg-quick up ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
 alias vpndown='sudo wg-quick down ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
 alias mount3ds='sudo mount -o uid=$UID,gid=$(id -g) /dev/mmcblk0p1 /home/dell/usb'
 
+<<<<<<< HEAD
 alias espbuild='bash ~/.config/dotfiles/espbuildcommand.sh'
 
+=======
+>>>>>>> dc7a78d (Fixed the dwm command in the bashrc)
 alias homevpnup='sudo wg-quick up ~/client-wg.conf'
 alias homevpndown='sudo wg-quick down ~/client-wg.conf'
 
