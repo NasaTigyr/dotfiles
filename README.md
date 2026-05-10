@@ -80,3 +80,12 @@ nmcli dev wifi connect  "Your ssid" password "password"
 
 Here you can also use the nmcui, because that way you have a faster way to use the NetworkManager when shit hits the
 fan. 
+
+# Void linux
+for lapop: 
+xfce + dwm 
+dwm - fullgaps only and some custom things i will paste down in a second.
+
+Lazy vim
+
+pulseaudio + pavucontrol 
