@@ -6,6 +6,7 @@ export EDITOR=nvim
 export VISUAL=nvim
 
 alias ls='ls --color=auto'
+alias la='ls -al --color=auto'
 alias xi='sudo xbps-install '
 alias network='sudo nmtui'
 
@@ -16,22 +17,12 @@ alias vpnup='sudo wg-quick up ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
 alias vpndown='sudo wg-quick down ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
 alias mount3ds='sudo mount -o uid=$UID,gid=$(id -g) /dev/mmcblk0p1 /home/dell/usb'
 
-<<<<<<< HEAD
 alias espbuild='bash ~/.config/dotfiles/espbuildcommand.sh'
 
-=======
->>>>>>> dc7a78d (Fixed the dwm command in the bashrc)
 alias homevpnup='sudo wg-quick up ~/client-wg.conf'
 alias homevpndown='sudo wg-quick down ~/client-wg.conf'
 
 alias vim='nvim'
-alias ls='ls --color=auto'
-alias xi='sudo xbps-install'
-alias xu='sudo xbps-update'
-alias laydvo='sudo loadkeys dvorak'
-alias layus='sudo loadkeys us'
-alias dv='setxkbmap -layout us -variant dvorak'
-alias qw='setxkbmap -layout us -variant qwerty'
 
 alias dwmrc='cd ~/dwm ; vim config.h '
 alias strc='cd ~/st ; vim config.h '
