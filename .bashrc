@@ -29,7 +29,6 @@ alias laydvo='sudo loadkeys dvorak'
 alias layus='sudo loadkeys us'
 alias dv='setxkbmap -layout us -variant dvorak'
 alias qw='setxkbmap -layout us -variant qwerty'
-alias dwm='cd ~/.config/dwm-btw'
 
 alias dwmrc='cd ~/dwm ; vim config.h '
 alias strc='cd ~/st ; vim config.h '
