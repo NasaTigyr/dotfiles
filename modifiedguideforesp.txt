@@ -27,6 +27,8 @@ sudo apt update
 sudo apt install git wget flex bison gperf python3 python3-pip python3-venv \
 cmake ninja-build ccache libffi-dev libssl-dev dfu-util
 
+sudo xbps-install -S git wget flex bison gperf python3 python3-pip \
+cmake ninja ccache libffi-devel openssl-devel dfu-util
 
 ------------------------------------------------------------
 2.2 Create ESP folder
