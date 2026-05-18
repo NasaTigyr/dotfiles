@@ -19,6 +19,9 @@ setxkbmap us,bg -variant dvorak,phonetic -option grp:shifts_toggle
 
 # Auto-start Discord Flatpak
 #flatpak run --env=ZYPAK_DISABLE_SANDBOX=1 com.discordapp.Discord &
-
+sudo setkeycodes e04c 224
+sudo setkeycodes e054 225
+xmodmap -e "keycode 224 = XF86MonBrightnessDown"
+xmodmap -e "keycode 225 = XF86MonBrightnessUp"
 # Finally, start dwm
 exec dwm
