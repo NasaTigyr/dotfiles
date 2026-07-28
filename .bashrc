@@ -9,10 +9,10 @@ alias ls='ls --color=auto'
 alias la='ls -al --color=auto'
 alias xi='sudo xbps-install '
 alias network='sudo nmtui'
-alias lock='slock &'
 
 alias dvorak='sudo loadkeys dvorak'
 alias stdv='sudo setxkbmap us -variant dvorak'
+alias setkb='setxkbmap us,bg -variant dvorak,phonetic -option grp:shifts_toggle'
 
 alias vpnup='sudo wg-quick up ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
 alias vpndown='sudo wg-quick down ~/Documents/config_files/RSCI-NS-HP-Debi.conf'
