@@ -9,6 +9,7 @@ alias ls='ls --color=auto'
 alias la='ls -al --color=auto'
 alias xi='sudo xbps-install '
 alias network='sudo nmtui'
+alias lock='slock &'
 
 alias dvorak='sudo loadkeys dvorak'
 alias stdv='sudo setxkbmap us -variant dvorak'

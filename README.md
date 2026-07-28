@@ -86,6 +86,8 @@ for lapop:
 xfce + dwm 
 dwm - fullgaps only and some custom things i will paste down in a second.
 
+I forgot to paste them, so no one will ever know, XD; 
+
 Lazy vim
 
 pulseaudio + pavucontrol 
