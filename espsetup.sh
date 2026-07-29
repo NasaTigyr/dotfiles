@@ -2,12 +2,14 @@
 
 set -euo pipefail
 # ---------- project variables ----------
-PROJECT_PATH=""
+ESP32_DIR_PATH=""
 PROJECT_NAME=""
 PROJECT_DIR=""
+ESP32MODEL=""
 
 # ---------- helpers ----------
 log() { printf '\n\033[1;32m==>\033[0m %s\n' "$1"; }
+dot() { printf '\n\033[1;32m*\033[0m %s\n' "$1"; }
 warn() { printf '\033[1;33m[warn]\033[0m %s\n' "$1"; }
 err() { printf '\033[1;31m[error]\033[0m %s\n' "$1" >&2; }
 
@@ -71,27 +73,34 @@ menu_create_rep() {
   # read -p "Do you want to create a repository for the ESP32 project? (yes or no): " answer
   log "Creating an ESP32 dev enviorment"
 
-  read -p "Do you want to create a directory for the ESP32 project? (yes or no): " answer
-  if [[ "$answer" != "yes" && "$answer" != "y" ]]; then
-    echo "Skipping the ESP32 repository part"
-    return 1
+  dot "Creating the development enviorment directory"
+  read -p "Insert path for it dir: " ESP32_DIR_PATH
+  ESP32_DIR_PATH="${ESP32_DIR_PATH/#\~/$HOME}"
+
+  if [[ -d "$ESP32_DIR_PATH" ]]; then
+    dot "The directory exists, moving on"
+  else
+    dot "Creating ${ESP32_DIR_PATH} "
+    mkdir -p "$ESP32_DIR_PATH"
   fi
 
-  log "Creating ESP32 repository"
+  #read -p "Would you like to create a project dir inside of it now?(yes or no): " answer
+  #if [[ "$answer" == "yes" || "$answer" == "y" ]]; then
+  #log "Creating the project inside"
+  #read -p "Insert name of the project dir: " PROJECT_NAME
+  #PROJECT_DIR="$ESP32_DIR_PATH/$PROJECT_NAME"
+  #mkdir -p "$PROJECT_DIR"
+  #fi
+}
 
-  read -p "Insert path for the project dir: " PROJECT_PATH
-
-  read -p "Insert name of the project dir: " PROJECT_NAME
-
-  PROJECT_PATH="${PROJECT_PATH/#\~/$HOME}"
-
-  PROJECT_DIR="$PROJECT_PATH/$PROJECT_NAME"
-
-  log "Creating: $PROJECT_DIR"
-  mkdir -p "$PROJECT_DIR"
-
+cloning_idf() {
   log "Cloning ESP-IDF"
-  git clone --recursive https://github.com/espressif/esp-idf.git $PROJECT_DIR
+
+  if [[ -d "$ESP32_DIR_PATH/esp-idf" ]]; then
+    dot "esp-idf already present, skipping clone"
+  else
+    git clone --recursive https://github.com/espressif/esp-idf.git "$ESP32_DIR_PATH/esp-idf"
+  fi
 
   local espmodels=(
     esp32
@@ -109,7 +118,7 @@ menu_create_rep() {
   log "Installing toolchain"
 
   while true; do
-    read -p "What ESP32 toolchain should be installed? (press 'h'for help): " ESP32MODEL
+    read -p "What ESP32 toolchain should be installed? ('h' for help, 'n' for skipping): " ESP32MODEL
 
     if [[ "$ESP32MODEL" == "h" ]]; then
 
@@ -138,13 +147,13 @@ menu_create_rep() {
     fi
   done
 
-  cd $PROJECT_DIR/esp/esp-idf
+  cd "$ESP32_DIR_PATH/esp-idf"
   ./install.sh "$ESP32MODEL"
 
   log "Loading the ESP-IDF enviorment"
-  source ~/esp/esp-idf/export.sh
+  source "$ESP32_DIR_PATH/esp-idf/export.sh"
 
-  $(verify_install)
+  verify_install
 
 }
 
@@ -156,9 +165,36 @@ fix_usb() {
 
 # ---------- verify_install ----------
 verify_install() {
-  log "Verifying of the idf.py installation"
+  log "Verifying of the idf.py install"
   idf.py --version
-  idf.py set-target "$ESP32MODEL"
+}
+
+# ---------- create project  ----------
+
+create_project() {
+  log "Project creation"
+  read -p "Would you like to create a project dir inside of it now?(yes or no): " answer
+  if [[ "$answer" == "yes" || "$answer" == "y" ]]; then
+    read -p "Insert name of the project dir: " PROJECT_NAME
+
+    PROJECT_DIR="$ESP32_DIR_PATH/$PROJECT_NAME"
+
+    dot "Creating esp-idf project: $PROJECT_NAME"
+    cd "$ESP32_DIR_PATH"
+
+    idf.py create-project "$PROJECT_NAME"
+    cd "$PROJECT_NAME"
+
+    dot "Project created"
+
+    dot "Checking version of idf.py"
+    idf.py --version
+
+    dot "Setting-target"
+    idf.py set-target "${ESP32MODEL}"
+  else
+    dot "Skipping project creation"
+  fi
 }
 
 # ---------- main  ----------
@@ -167,7 +203,8 @@ main() {
   install_packages
   verify_toolchain
   menu_create_rep
-  verify_install
+  cloning_idf
+  create_project
 }
 
 main "$@"
