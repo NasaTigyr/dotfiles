@@ -1,0 +1,760 @@
+ESP-IDF AUTOMATION GUIDE
+ESP32-C3 DEVELOPMENT WORKFLOW
+==============================================
+
+Purpose:
+--------
+This document explains the ESP-IDF command workflow needed to automate
+ESP32-C3 development.
+
+The goal is to understand:
+
+- Which commands exist
+- When to run them
+- Which directory they need to run from
+- What each command changes
+- How to combine them into scripts
+
+
+==============================================
+1. ESP-IDF INSTALLATION (ONE TIME ONLY)
+==============================================
+
+These commands are normally executed once on a new Linux installation.
+
+After installation, you usually do not repeat them.
+
+
+----------------------------------------------
+1.1 Clone ESP-IDF
+----------------------------------------------
+
+Command:
+
+git clone --recursive https://github.com/espressif/esp-idf.git
+
+
+Directory:
+
+Recommended:
+
+~/esp/
+
+
+Example:
+
+cd ~/esp
+git clone --recursive https://github.com/espressif/esp-idf.git
+
+
+What it does:
+
+Downloads the ESP-IDF framework source code.
+
+Creates:
+
+~/esp/esp-idf/
+
+
+Contains:
+
+- ESP-IDF libraries
+- build system
+- tools
+- examples
+- compiler setup
+
+
+Automation use:
+
+Run once during first-time setup.
+
+
+----------------------------------------------
+1.2 Install ESP-IDF tools
+----------------------------------------------
+
+Command:
+
+cd ~/esp/esp-idf
+
+./install.sh esp32c3
+
+
+Directory:
+
+Must be inside:
+
+~/esp/esp-idf/
+
+
+What it does:
+
+Downloads:
+
+- ESP32-C3 compiler
+- Python environment
+- OpenOCD
+- debugging tools
+- flashing tools
+
+
+Creates:
+
+~/.espressif/
+
+
+Automation use:
+
+Run after cloning ESP-IDF.
+
+
+----------------------------------------------
+1.3 Load ESP-IDF environment
+----------------------------------------------
+
+Command:
+
+source ~/esp/esp-idf/export.sh
+
+
+Directory:
+
+Any directory.
+
+
+What it does:
+
+Adds ESP-IDF tools to the current shell.
+
+Creates access to:
+
+idf.py
+compiler tools
+debug tools
+
+
+Important:
+
+This only affects the current terminal.
+
+Every new terminal needs this command.
+
+
+Automation use:
+
+Every script using idf.py should start with this.
+
+
+Example:
+
+#!/bin/bash
+
+source ~/esp/esp-idf/export.sh
+
+idf.py build
+
+
+==============================================
+2. PROJECT CREATION
+==============================================
+
+
+----------------------------------------------
+2.1 Create a project
+----------------------------------------------
+
+Command:
+
+idf.py create-project PROJECT_NAME
+
+
+Directory:
+
+Run inside your workspace.
+
+
+Example:
+
+cd ~/esp32
+
+idf.py create-project blink
+
+
+Creates:
+
+blink/
+
+├── CMakeLists.txt
+├── main/
+│   ├── CMakeLists.txt
+│   └── main.c
+
+
+What it does:
+
+Creates the basic ESP-IDF project structure.
+
+
+Automation use:
+
+Used when creating a new project.
+
+
+----------------------------------------------
+2.2 Enter project directory
+----------------------------------------------
+
+Command:
+
+cd PROJECT_NAME
+
+
+Example:
+
+cd blink
+
+
+Why:
+
+idf.py commands operate on the current project.
+
+
+Most commands after this point happen here.
+
+
+==============================================
+3. PROJECT CONFIGURATION
+==============================================
+
+
+----------------------------------------------
+3.1 Set ESP32 target
+----------------------------------------------
+
+Command:
+
+idf.py set-target esp32c3
+
+
+Directory:
+
+Project root.
+
+Example:
+
+~/esp32/blink/
+
+
+What it does:
+
+Configures the project for ESP32-C3.
+
+
+Creates:
+
+sdkconfig
+
+
+Important:
+
+Run once per project.
+
+Run again if changing chips.
+
+
+Automation:
+
+After project creation:
+
+idf.py set-target esp32c3
+
+
+==============================================
+4. BUILD PROCESS
+==============================================
+
+
+----------------------------------------------
+4.1 Build firmware
+----------------------------------------------
+
+Command:
+
+idf.py build
+
+
+Directory:
+
+Project root.
+
+
+Example:
+
+~/esp32/blink/
+
+
+What it does:
+
+Runs:
+
+CMake
+Ninja compiler
+Linker
+
+
+Creates:
+
+build/
+
+
+Produces:
+
+- bootloader
+- partition table
+- application firmware
+
+
+Automation:
+
+Used every time code changes.
+
+
+Typical:
+
+idf.py build
+
+
+==============================================
+5. FLASHING TO ESP32
+==============================================
+
+
+----------------------------------------------
+5.1 Flash firmware
+----------------------------------------------
+
+Command:
+
+idf.py flash
+
+
+Directory:
+
+Project root.
+
+
+What it does:
+
+Uploads firmware to ESP32 flash memory.
+
+
+Uses:
+
+USB serial connection.
+
+
+----------------------------------------------
+5.2 Flash specific device
+----------------------------------------------
+
+Command:
+
+idf.py -p /dev/ttyACM0 flash
+
+
+Why:
+
+Multiple serial devices may exist.
+
+
+Find device:
+
+ls /dev/ttyACM*
+
+or:
+
+ls /dev/ttyUSB*
+
+
+Automation:
+
+Use a variable:
+
+PORT=/dev/ttyACM0
+
+idf.py -p $PORT flash
+
+
+==============================================
+6. SERIAL MONITOR
+==============================================
+
+
+----------------------------------------------
+6.1 Open monitor
+----------------------------------------------
+
+Command:
+
+idf.py monitor
+
+
+Directory:
+
+Project root.
+
+
+What it does:
+
+Opens UART communication.
+
+Displays:
+
+- printf output
+- ESP logs
+- crashes
+- boot messages
+
+
+Exit:
+
+CTRL + ]
+
+
+----------------------------------------------
+6.2 Monitor with port
+----------------------------------------------
+
+Command:
+
+idf.py -p /dev/ttyACM0 monitor
+
+
+Automation:
+
+Usually last command in development scripts.
+
+
+==============================================
+7. DAILY DEVELOPMENT SCRIPT
+==============================================
+
+
+Typical daily workflow:
+
+1. Load environment
+
+source ~/esp/esp-idf/export.sh
+
+
+2. Enter project
+
+cd ~/esp32/project
+
+
+3. Build
+
+idf.py build
+
+
+4. Flash
+
+idf.py -p /dev/ttyACM0 flash
+
+
+5. Monitor
+
+idf.py -p /dev/ttyACM0 monitor
+
+
+
+==============================================
+8. COMBINED COMMANDS
+==============================================
+
+
+----------------------------------------------
+8.1 Flash and monitor
+----------------------------------------------
+
+Command:
+
+idf.py flash monitor
+
+
+Does:
+
+1. Build if needed
+2. Flash ESP32
+3. Start serial monitor
+
+
+----------------------------------------------
+8.2 Complete development cycle
+----------------------------------------------
+
+Command:
+
+idf.py build flash monitor
+
+
+Does:
+
+1. Compile code
+2. Upload firmware
+3. Open serial output
+
+
+==============================================
+9. CLEANING PROJECTS
+==============================================
+
+
+----------------------------------------------
+9.1 Normal clean
+----------------------------------------------
+
+Command:
+
+idf.py clean
+
+
+Directory:
+
+Project root.
+
+
+Removes:
+
+Compiled files.
+
+
+Keeps:
+
+Configuration.
+
+
+Use when:
+
+Build is behaving strangely.
+
+
+----------------------------------------------
+9.2 Full clean
+----------------------------------------------
+
+Command:
+
+idf.py fullclean
+
+
+Removes:
+
+- build directory
+- generated files
+- cached configuration
+
+
+Use when:
+
+Changing:
+
+- ESP-IDF versions
+- ESP32 targets
+- CMake configuration
+
+
+Example:
+
+idf.py fullclean
+
+idf.py build
+
+
+==============================================
+10. CONFIGURATION MENU
+==============================================
+
+
+Command:
+
+idf.py menuconfig
+
+
+Directory:
+
+Project root.
+
+
+Opens:
+
+Interactive configuration menu.
+
+
+Can configure:
+
+- Flash size
+- CPU frequency
+- WiFi
+- Bluetooth
+- Logging
+- Partition table
+
+
+Creates:
+
+sdkconfig
+
+
+==============================================
+11. INFORMATION COMMANDS
+==============================================
+
+
+----------------------------------------------
+11.1 ESP-IDF version
+----------------------------------------------
+
+idf.py --version
+
+
+Works anywhere after sourcing ESP-IDF.
+
+
+----------------------------------------------
+11.2 Firmware size
+----------------------------------------------
+
+idf.py size
+
+
+Directory:
+
+Project root.
+
+
+Shows:
+
+Flash usage
+RAM usage
+
+
+----------------------------------------------
+11.3 Component size
+----------------------------------------------
+
+idf.py size-components
+
+
+Shows:
+
+Which libraries consume memory.
+
+
+==============================================
+12. AUTOMATION SCRIPT STRUCTURE
+==============================================
+
+
+A simple build script should look like:
+
+
+#!/bin/bash
+
+source ~/esp/esp-idf/export.sh
+
+PROJECT_DIR=~/esp32/project
+PORT=/dev/ttyACM0
+
+cd $PROJECT_DIR
+
+idf.py build
+
+idf.py -p $PORT flash
+
+
+Optional monitor:
+
+if [ "$1" = "m" ]; then
+    idf.py -p $PORT monitor
+fi
+
+
+
+==============================================
+13. RECOMMENDED SCRIPT SEPARATION
+==============================================
+
+
+setup_esp32.sh
+
+Runs once:
+
+- install packages
+- clone ESP-IDF
+- install tools
+
+
+create_project.sh
+
+Runs when creating projects:
+
+- create project
+- set target
+
+
+espbuild.sh
+
+Runs daily:
+
+- source environment
+- build
+- flash
+- monitor
+
+
+==============================================
+14. FINAL COMMAND MEMORY
+==============================================
+
+
+FIRST TIME:
+
+git clone --recursive ESP-IDF
+
+./install.sh esp32c3
+
+source export.sh
+
+
+NEW PROJECT:
+
+idf.py create-project name
+
+cd name
+
+idf.py set-target esp32c3
+
+
+EVERYDAY:
+
+source export.sh
+
+cd project
+
+idf.py build
+
+idf.py flash
+
+idf.py monitor
+
+
+WHEN SOMETHING BREAKS:
+
+idf.py fullclean
+
+idf.py build
+
+
+END OF GUIDE
