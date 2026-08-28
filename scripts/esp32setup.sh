@@ -21,6 +21,12 @@ require_root_actions() {
 }
 
 # --------- install packages ---------
+quit() {
+  log "Quiting script"
+  exit 0
+}
+
+# --------- install packages ---------
 install_packages() {
   #  sudo xbps-install -S git wget flex bison gperf python3 python3-pip cmake ninja ccache libffi-devel openssl-devel dfu-util
 
@@ -69,7 +75,7 @@ verify_toolchain() {
 }
 
 # ---------- create working repository ? ----------
-menu_create_rep() {
+create_dev_dir() {
   # read -p "Do you want to create a repository for the ESP32 project? (yes or no): " answer
   log "Creating an ESP32 dev enviorment"
 
@@ -197,14 +203,62 @@ create_project() {
   fi
 }
 
+# ---------- menu ----------
+menu() {
+  log "ESP32 Dev script"
+  dot "Menu"
+  echo "1.Start from the begining"
+  echo "2.Install packages "
+  echo "3.Verify toolchain "
+  echo "4.Create esp32dev directory "
+  echo "5.Create new project "
+  echo "6.Quit"
+
+  read -p "Insert the number of the answer: " answer
+
+  case $answer in
+  1)
+    dot "Full script in action: "
+    require_root_actions
+    install_packages
+    verify_toolchain
+    create_dev_dir
+    cloning_idf
+    create_project
+    menu
+    ;;
+  2)
+    dot " Install packages"
+    install_packages
+    menu
+    ;;
+  3)
+    dot " Verify toolchain"
+    verify_toolchain
+    menu
+    ;;
+  4)
+    dot " Create esp32dev directory"
+    create_dev_dir
+    cloning_idf
+    menu
+    ;;
+  5)
+    dot " Create new project"
+    create_project
+    menu
+    ;;
+  6)
+    dot " Quit"
+    quit
+    ;;
+  esac
+
+}
+
 # ---------- main  ----------
 main() {
-  require_root_actions
-  install_packages
-  verify_toolchain
-  menu_create_rep
-  cloning_idf
-  create_project
+  menu
 }
 
 main "$@"
