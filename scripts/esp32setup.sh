@@ -76,85 +76,99 @@ verify_toolchain() {
 
 # ---------- create working repository ? ----------
 create_dev_dir() {
-  # read -p "Do you want to create a repository for the ESP32 project? (yes or no): " answer
+  # read -p "Do you want to create a home directory for the ESP32 project? (yes or no): " answer
   log "Creating an ESP32 dev enviorment"
 
   dot "Creating the development enviorment directory"
   read -p "Insert path for it dir: " ESP32_DIR_PATH
   ESP32_DIR_PATH="${ESP32_DIR_PATH/#\~/$HOME}"
 
+  echo "Path: [$ESP32_DIR_PATH]"
+
   if [[ -d "$ESP32_DIR_PATH" ]]; then
     dot "The directory exists, moving on"
   else
     dot "Creating ${ESP32_DIR_PATH} "
     mkdir -p "$ESP32_DIR_PATH"
+    dot "Created it"
   fi
-
-  #read -p "Would you like to create a project dir inside of it now?(yes or no): " answer
-  #if [[ "$answer" == "yes" || "$answer" == "y" ]]; then
-  #log "Creating the project inside"
-  #read -p "Insert name of the project dir: " PROJECT_NAME
-  #PROJECT_DIR="$ESP32_DIR_PATH/$PROJECT_NAME"
-  #mkdir -p "$PROJECT_DIR"
-  #fi
 }
 
-cloning_idf() {
-  log "Cloning ESP-IDF"
+# ---------- cloning idf + installing toolchain----------
 
-  if [[ -d "$ESP32_DIR_PATH/esp-idf" ]]; then
-    dot "esp-idf already present, skipping clone"
-  else
-    git clone --recursive https://github.com/espressif/esp-idf.git "$ESP32_DIR_PATH/esp-idf"
+cloning_idf_toolchain() {
+
+  if [[ -z "$ESP32_DIR_PATH" ]]; then
+    read -p "What is the path of the esp32 dev dir? " ESP32_DIR_PATH
+    echo "Path: [ $ESP32_DIR_PATH]"
   fi
 
-  local espmodels=(
-    esp32
-    esp32s2
-    esp32s3
-    esp32c2
-    esp32c3
-    esp32c5
-    esp32c6
-    esp32h2
-    linux
-    all
-  )
+  log "Cloning ESP-IDF"
+
+  read -p "Do you want to clone the esp-idf? (yes or no): " answer
+  if [[ "$answer" == "yes" || "$answer" == "y" ]]; then
+
+    if [[ ! -d "$ESP32_DIR_PATH/esp-idf" ]]; then
+      dot "esp-idf already present, skipping clone"
+    else
+      git clone --recursive https://github.com/espressif/esp-idf.git "$ESP32_DIR_PATH/esp-idf"
+    fi
+
+  fi
 
   log "Installing toolchain"
 
-  while true; do
-    read -p "What ESP32 toolchain should be installed? ('h' for help, 'n' for skipping): " ESP32MODEL
+  read -p "Do you want to install toolchain? (yes or no): " answer
+  if [[ "$answer" == "yes" || "$answer" == "y" ]]; then
 
-    if [[ "$ESP32MODEL" == "h" ]]; then
+    local espmodels=(
+      all
+      esp32
+      esp32s2
+      esp32s3
+      esp32c2
+      esp32c3
+      esp32c5
+      esp32c6
+      esp32h2
+      linux
+    )
 
-      echo "Available ESP-IDF targets: "
+    while true; do
+      #    read -p "What ESP32 toolchain should be installed? \n ('h' for help, 'n' for skipping): " ESP32MODEL
+      printf "What ESP32 toolchain should be installed?\n('h' for help, 'n' for skipping): "
+      read -r ESP32MODEL
+
+      if [[ "$ESP32MODEL" == "h" ]]; then
+
+        echo "Available ESP-IDF targets: "
+        for espmodel in "${espmodels[@]}"; do
+          echo " - $espmodel"
+        done
+        echo
+        continue
+      fi
+
+      valid=false
       for espmodel in "${espmodels[@]}"; do
-        echo " - $espmodel"
+        if [[ "$ESP32MODEL" == "$espmodel" ]]; then
+          valid=true
+          break
+        fi
       done
-      echo
-      continue
-    fi
 
-    valid=false
-    for espmodel in "${espmodels[@]}"; do
-      if [[ "$ESP32MODEL" == "$espmodel" ]]; then
-        valid=true
+      if $valid; then
+        echo "Selected target: $ESP32MODEL"
         break
+      else
+        err "Invalid target: $ESP32MODEL"
+        echo "Press 'h' for available options"
       fi
     done
 
-    if $valid; then
-      echo "Selected target: $ESP32MODEL"
-      break
-    else
-      err "Invalid target: $ESP32MODEL"
-      echo "Press 'h' for available options"
-    fi
-  done
-
-  cd "$ESP32_DIR_PATH/esp-idf"
-  ./install.sh "$ESP32MODEL"
+    cd "$ESP32_DIR_PATH/esp-idf"
+    ./install.sh "$ESP32MODEL"
+  fi
 
   log "Loading the ESP-IDF enviorment"
   source "$ESP32_DIR_PATH/esp-idf/export.sh"
@@ -178,14 +192,27 @@ verify_install() {
 # ---------- create project  ----------
 
 create_project() {
+
+  if [[ -z "$ESP32_DIR_PATH" ]]; then
+    ESP32_DIR_PATH=$(pwd)
+    #      echo "$ESP32_DIR_PATH"
+  fi
+
+  source "$ESP32_DIR_PATH/esp-idf/export.sh"
+
+  verify_install
+
   log "Project creation"
   read -p "Would you like to create a project dir inside of it now?(yes or no): " answer
   if [[ "$answer" == "yes" || "$answer" == "y" ]]; then
     read -p "Insert name of the project dir: " PROJECT_NAME
 
-    PROJECT_DIR="$ESP32_DIR_PATH/$PROJECT_NAME"
+    source "$ESP32_DIR_PATH/esp-idf/export.sh"
 
-    dot "Creating esp-idf project: $PROJECT_NAME"
+    PROJECT_DIR="$ESP32_DIR_PATH/$PROJECT_NAME"
+    #    mkdir "$PROJECT_DIR"
+
+    #dot "Creating esp-idf project: $PROJECT_NAME"
     cd "$ESP32_DIR_PATH"
 
     idf.py create-project "$PROJECT_NAME"
@@ -197,7 +224,14 @@ create_project() {
     idf.py --version
 
     dot "Setting-target"
-    idf.py set-target "${ESP32MODEL}"
+    #if [[ -z "$ESP32MODEL"]]; then
+    #
+    #fi
+
+    read -p "Which ESP32 target is this project for? " ESP32_TARGET
+
+    idf.py set-target "$ESP32_TARGET"
+    #    idf.py set-target "${ESP32MODEL}"
   else
     dot "Skipping project creation"
   fi
@@ -211,10 +245,12 @@ menu() {
   echo "2.Install packages "
   echo "3.Verify toolchain "
   echo "4.Create esp32dev directory "
-  echo "5.Create new project "
-  echo "6.Quit"
+  echo "5.Cloning idf and toolchain"
+  echo "6.Create new project "
+  echo "7.Quit"
 
   read -p "Insert the number of the answer: " answer
+  fix_usb
 
   case $answer in
   1)
@@ -223,12 +259,14 @@ menu() {
     install_packages
     verify_toolchain
     create_dev_dir
-    cloning_idf
+    cloning_idf_toolchain
+    fix_usb
     create_project
     menu
     ;;
   2)
     dot " Install packages"
+    require_root_actions
     install_packages
     menu
     ;;
@@ -240,15 +278,19 @@ menu() {
   4)
     dot " Create esp32dev directory"
     create_dev_dir
-    cloning_idf
     menu
     ;;
   5)
+    dot " Cloning idf and toolchain"
+    cloning_idf_toolchain
+    menu
+    ;;
+  6)
     dot " Create new project"
     create_project
     menu
     ;;
-  6)
+  7)
     dot " Quit"
     quit
     ;;
