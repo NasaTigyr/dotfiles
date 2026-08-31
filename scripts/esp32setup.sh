@@ -22,7 +22,7 @@ require_root_actions() {
 
 # --------- install packages ---------
 quit() {
-  log "Quiting script"
+  dot "Quiting script"
   exit 0
 }
 
@@ -250,7 +250,6 @@ menu() {
   echo "7.Quit"
 
   read -p "Insert the number of the answer: " answer
-  fix_usb
 
   case $answer in
   1)
@@ -291,7 +290,7 @@ menu() {
     menu
     ;;
   7)
-    dot " Quit"
+    log " Quit"
     quit
     ;;
   esac
