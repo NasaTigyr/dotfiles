@@ -50,7 +50,7 @@ bind 'TAB:menu-complete'
 #export ESP32_DIR="$HOME/esp32"
 #export ESP_IDF_DIR="$ESP32_DIR/esp-idf"
 
-alias esp-setup='bash ~/.config/dotfiles/scripts/esp32setup.sh'
+alias esp-setup=' ~/.config/dotfiles/scripts/esp32setup.sh'
 
 alias esp-build='idf.py build'
 alias esp-flash='idf.py flash'
