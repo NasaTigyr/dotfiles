@@ -31,8 +31,8 @@ alias dotfiles='cd ~/.config/dotfiles'
 
 alias bashrc='vim ~/.bashrc && source ~/.bashrc'
 
-alias crun='~/.config/dotfiles/jrun-bash-script/runc.sh'
-alias jrun='~/.config/dotfiles/jrun-bash-script/runjava.sh'
+alias crun='~/.config/dotfiles/scripts/runc.sh'
+alias jrun='~/.config/dotfiles/scripts/runjava.sh'
 alias prun='python3'
 
 alias rc='ranger_cd'
@@ -45,6 +45,24 @@ alias tmuxks="tmux kill-server"
 alias sound="alsamixer"
 
 bind 'TAB:menu-complete'
+
+# ---------- ESP32 ----------
+#export ESP32_DIR="$HOME/esp32"
+#export ESP_IDF_DIR="$ESP32_DIR/esp-idf"
+
+alias esp-setup='bash ~/.config/dotfiles/scripts/esp32setup.sh'
+
+alias esp-build='idf.py build'
+alias esp-flash='idf.py flash'
+alias esp-monitor='idf.py monitor'
+alias esp-menuconfig='idf.py menuconfig'
+alias esp-size='idf.py size'
+
+esp-run() {
+  idf.py build &&
+    idf.py flash &&
+    idf.py monitor
+}
 
 pbcopy() {
   if [ "$1" = "-c" ]; then
