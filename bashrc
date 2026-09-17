@@ -10,6 +10,8 @@ alias la='ls -al --color=auto'
 alias xi='sudo xbps-install '
 alias network='sudo nmtui'
 
+alias getwindow='xprop WM_CLASS'
+
 alias dvorak='sudo loadkeys dvorak'
 alias stdv='sudo setxkbmap us -variant dvorak'
 alias setkb='setxkbmap us,bg -variant dvorak,phonetic -option grp:shifts_toggle'

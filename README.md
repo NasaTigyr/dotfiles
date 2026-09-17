@@ -91,3 +91,10 @@ I forgot to paste them, so no one will ever know, XD;
 Lazy vim
 
 pulseaudio + pavucontrol 
+
+# This are new commands using the beyond compare for my workflow.
+
+git difftool                  # diff working tree vs index
+git difftool HEAD~1 HEAD      # diff two commits
+git difftool --dir-diff       # whole-tree side-by-side diff (BC is great at this)
+git mergetool                 # resolve conflicts in BC's 3-way merge view
