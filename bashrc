@@ -95,3 +95,5 @@ ranger_cd() {
   # Clean up
   rm -f "$tempfile"
 }
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$HOME/.dotnet
