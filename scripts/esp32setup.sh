@@ -20,7 +20,7 @@ require_root_actions() {
   fi
 }
 
-# --------- install packages ---------
+# --------- quit ---------
 quit() {
   dot "Quiting script"
   exit 0

@@ -11,9 +11,16 @@
 # Usage: ./setup-stm32-dev.sh
 
 set -euo pipefail
+#
+# ---------- project variables ----------
+STM32_DIR_PATH=""
+PROJECT_NAME=""
+PROJECT_DIR=""
+STM32MODEL=""
 
 # ---------- helpers ----------
 log() { printf '\n\033[1;32m==>\033[0m %s\n' "$1"; }
+dot() { printf '\n\033[1;32m*\033[0m %s\n' "$1"; }
 warn() { printf '\033[1;33m[warn]\033[0m %s\n' "$1"; }
 err() { printf '\033[1;31m[error]\033[0m %s\n' "$1" >&2; }
 
@@ -22,6 +29,73 @@ require_root_actions() {
     err "Don't run this whole script as root — it uses sudo where needed."
     exit 1
   fi
+}
+
+# ---------- menu ----------
+menu() {
+  log "STM32 Dev script"
+  dot "Menu"
+  echo "1.Run full script"
+  echo "2.Install packages "
+  echo "3.Verify toolchain "
+  echo "4.Create stm32dev directory "
+  echo "5.Cloning git base"
+  echo "6.Create new project "
+  echo "7.Quit"
+
+  read -p "Insert the number of the answer: " answer
+
+  case $answer in
+  1)
+    dot "Full script in action: "
+    require_root_actions
+    install_packages
+    verify_toolchain
+    setup_udev
+    setup_groups
+    create_dev_dir
+    cloning_git_blueprint
+    create_project
+    menu
+    ;;
+  2)
+    dot " Install packages"
+    require_root_actions
+    install_packages
+    menu
+    ;;
+  3)
+    dot " Verify toolchain"
+    verify_toolchain
+    menu
+    ;;
+  4)
+    dot " Create esp32dev directory"
+    create_dev_dir
+    menu
+    ;;
+  5)
+    dot "Git clone "
+    cloning_git_blueprint
+    menu
+    ;;
+  6)
+    dot " Create new project"
+    create_project
+    menu
+    ;;
+  7)
+    log " Quit"
+    quit
+    ;;
+  esac
+
+}
+
+# --------- quit ---------
+quit() {
+  dot "Quiting script"
+  exit 0
 }
 
 # ---------- package install ----------
@@ -105,24 +179,86 @@ setup_groups() {
   fi
 }
 
-# ---------- LazyVim starter (optional) ----------
-setup_lazyvim() {
-  local nvim_config="$HOME/.config/nvim"
+# ---------- create working directory? ----------
+create_dev_dir() {
+  # read -p "Do you want to create a home directory for the ESP32 project? (yes or no): " answer
+  log "Creating an STM32 dev enviorment"
 
-  if [[ -d "$nvim_config" ]]; then
-    log "Neovim config already exists at $nvim_config — skipping LazyVim clone"
-    return
-  fi
+  dot "Creating the development enviorment directory"
+  read -p "Insert path for it dir: " STM32_DIR_PATH
+  STM32_DIR_PATH="${STM32_DIR_PATH/#\~/$HOME}"
 
-  read -r -p "No Neovim config found. Clone LazyVim starter into $nvim_config? [y/N] " reply
-  if [[ "$reply" =~ ^[Yy]$ ]]; then
-    git clone https://github.com/LazyVim/starter "$nvim_config"
-    log "Cloned LazyVim starter. Run 'nvim' once to let it install plugins."
+  echo "Path: [$STM32_DIR_PATH]"
+
+  if [[ -d "$STM32_DIR_PATH" ]]; then
+    dot "The directory exists, moving on"
   else
-    log "Skipping LazyVim setup."
+    dot "Creating ${STM32_DIR_PATH} "
+    mkdir -p "$STM32_DIR_PATH"
+    dot "Created it"
   fi
 }
 
+# ---------- cloning git blueprint ----------
+
+cloning_git_blueprint() {
+
+  if [[ -z "$STM32_DIR_PATH" ]]; then
+    read -p "What is the path of the STM32 dev dir? " STM32_DIR_PATH
+    STM32_DIR_PATH="${STM32_DIR_PATH/#\~/$HOME}"
+    echo "Path: [ $STM32_DIR_PATH]"
+  fi
+
+  log "Cloning STM32 blueprint"
+
+  read -p "Do you want to clone the STM32 toolchain(yes or no): " answer
+  if [[ "$answer" == "yes" || "$answer" == "y" ]]; then
+
+    if [[ ! -d "$STM32_DIR_PATH/libopencm3" ]]; then
+      #  cd "$STM32_DIR_PATH"
+      git clone --recurse-submodules https://github.com/libopencm3/libopencm3-template "$STM32_DIR_PATH"
+    else
+      dot "libraries are already present, skipping clone"
+    fi
+
+  fi
+
+  dot "DevEnviorment set"
+
+}
+
+# ---------- create_project ----------
+
+create_project() {
+
+  if [[ -z "$STM32_DIR_PATH" ]]; then
+    STM32_DIR_PATH=$(pwd)
+    if [[ ! -d "$STM32_DIR_PATH/libopencm3" ]]; then
+      dot "You are already in the root of the project"
+      echo "Setting STM32_DIR_PATH to current working directory"
+    else
+      read -p "You are not in the STM32 DevEnv. Insert path to it: " STM32_DIR_PATH
+    fi
+  fi
+
+  log "Project creation"
+  read -p "Would you like to create a project dir inside of it now?(yes or no): " answer
+  if [[ "$answer" == "yes" || "$answer" == "y" ]]; then
+    read -p "Insert name of the project dir: " PROJECT_NAME
+
+    PROJECT_DIR="$STM32_DIR_PATH/$PROJECT_NAME"
+    #    mkdir "$PROJECT_DIR"
+
+    #dot "Creating esp-idf project: $PROJECT_NAME"
+    cd "$STM32_DIR_PATH"
+    mkdir "$PROJECT_DIR"
+    touch "$PROJECT_DIR"/main.c
+    cp ./my-project/Makefile "$PROJECT_DIR"/Makefile
+
+    dot "Project created"
+  fi
+
+}
 # ---------- summary ----------
 print_summary() {
   log "Setup complete. Quick reference:"
@@ -154,6 +290,7 @@ EOF
 
 # ---------- main ----------
 main() {
+  menu
   require_root_actions
   install_packages
   verify_toolchain
