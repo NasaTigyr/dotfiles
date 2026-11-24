@@ -81,6 +81,32 @@ nmcli dev wifi connect  "Your ssid" password "password"
 Here you can also use the nmcui, because that way you have a faster way to use the NetworkManager when shit hits the
 fan. 
 
+## PC setups
+  On all of my machines I use this dotfile repos + dwm_rice + st_rice.
+  The set up proccess is all the same.
+
+# Home Desktop 
+MX Linux with xfce + dwm
+I use the default installation, but added option to change between xfce and dwm, because I love the 
+keyboard centered way of doing things. 
+
+
+The process: 
+-Must be on x11
+clone my dwm_rice, st_rice, dwmblocks_rice repos, read the README files and install them
+
+sudo nano /usr/share/xsessions/dwm.desktop 
+
+Paste this: 
+[Desktop Entry]
+Name=dwm
+Comment=My customized dwm
+Exec=/home/*yourusername/.config/dotfiles/start-dwm
+Type=Application
+DesktopNames=dwm
+
+
+
 # Void linux
 for lapop: 
 xfce + dwm 
