@@ -8,6 +8,10 @@ fi
 # Start compositor
 picom --backend xrender &
 
+#Start pipewire
+pipewire &
+wireplumber &
+
 # Set wallpaper
 feh --bg-scale /home/tgr/background.jpg &
 
